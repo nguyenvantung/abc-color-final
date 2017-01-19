@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:id="@+id/headerTool"
+    android:background="@drawable/play_tool_bar">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/toolBucket"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/item_bucket"
+            android:layout_margin="2dp"/>
+
+        <ImageView
+            android:id="@+id/toolBush"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/item_tool_bush"
+            android:layout_margin="2dp"/>
+
+        <ImageView
+            android:id="@+id/toolEraser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/item_eraser"
+            android:layout_margin="2dp"/>
+
+        <ImageView
+            android:id="@+id/toolDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/tool_delete"
+            android:layout_margin="2dp"/>
+
+        <ImageView
+            android:id="@+id/toolZoom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/tool_zoom"
+            android:layout_margin="2dp"/>
+
+        <ImageView
+            android:id="@+id/toolDone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/tool_done"
+            android:layout_margin="2dp"/>
+    </LinearLayout>
+
+</HorizontalScrollView>
