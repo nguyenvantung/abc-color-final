@@ -12,23 +12,20 @@ import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.support.v4.internal.view.SupportMenu;
 import android.support.v4.view.GestureDetectorCompat;
-import android.support.v4.widget.AutoScrollHelper;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
-import android.view.ScaleGestureDetector;
 import android.view.Window;
 import android.view.WindowManager;
 
 import com.color.kid.colorpaintkids.R;
 import com.color.kid.colorpaintkids.constance.Constants;
-import com.color.kid.colorpaintkids.util.DebugLog;
 import com.color.kid.colorpaintkids.util.QueueLinearFloodFiller;
-import com.color.kid.colorpaintkids.util.QueueLinearFloodFillerSingleton;
 import com.color.kid.colorpaintkids.util.SharePreferencesUtil;
 import com.color.kid.colorpaintkids.util.Util;
 import com.color.kid.colorpaintkids.view.RenderColor;
+
+import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -50,7 +47,6 @@ public class ColorActivity extends AppCompatActivity implements GestureDetector.
     private Bitmap mBackgroundBitmap;
     private GestureDetectorCompat gestureDetectorCompat;
     private float mScaleFactor = 1.0f;
-    private int mColorBucket = Color.BLUE;
     private Canvas mCanvas;
     private Paint mPaint;
     private Path mPath;
@@ -63,6 +59,18 @@ public class ColorActivity extends AppCompatActivity implements GestureDetector.
     private boolean mRendererSet;
 
     private boolean isDelete = false;
+    private boolean isBucket = false;
+
+    // handle undo
+    private ArrayList<Path> paths = new ArrayList<Path>();
+    private ArrayList<Paint> paints = new ArrayList<Paint>();
+
+    private ArrayList<Path> undonePaths = new ArrayList<Path>();
+    private ArrayList<Paint> undonePaints = new ArrayList<Paint>();
+    private int paintIndex = 0;
+    private int mColorBush;
+    private int mColorBucket;
+
 
     public enum Tool {
         BRUSH,
@@ -83,31 +91,29 @@ public class ColorActivity extends AppCompatActivity implements GestureDetector.
         ButterKnife.bind(this);
 
         intitData();
+        mColorBush = getResources().getColor(R.color.colorAccent);
+        mColorBucket = getResources().getColor(R.color.colorPrimary);
 
     }
 
     public void intitData() {
         surfaceView.setEGLContextClientVersion(2);
+
         renderColor = new RenderColor(this);
         mRendererSaver = new ColoringGLRendererSaver();
-        mColoringBitmap = Bitmap.createBitmap(Constants.WIDTH_BITMAP, Constants.HEIGHT_BITMAP, Bitmap.Config.ARGB_8888);
-        mColoringBitmap.eraseColor(Color.WHITE);
+        setupBitmap();
 
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inScaled = false;
-        this.mOverlayBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.picture_1, options);
-        BitmapFactory.Options optionsBackground = new BitmapFactory.Options();
-        options.inScaled = false;
-        this.mBackgroundBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.bg, optionsBackground);
-        mColoringBitmap = Util.overlay(mColoringBitmap, mOverlayBitmap);
-        renderColor.setColoringBitmap(this.mColoringBitmap);
-        renderColor.setOverlayBitmap(this.mOverlayBitmap);
-        renderColor.setBackgroundBitmap(this.mBackgroundBitmap);
-        renderColor.setScaleRatioResume(this.mScaleFactor, this.mRendererSaver.mCenterScaleX, this.mRendererSaver.mCenterScaleY, this.mRendererSaver.mDistanceX, this.mRendererSaver.mDistanceY);
-        surfaceView.setRenderer(this.renderColor);
-        this.mRendererSet = true;
+
+        surfaceView.setRenderer(renderColor);
         gestureDetectorCompat = new GestureDetectorCompat(this, this);
+        this.mRendererSet = true;
 
+       setupPaint();
+        this.mIsScaling = false;
+        mSelectedTool = Tool.BRUSH;
+    }
+
+    public void setupPaint(){
         this.mCanvas = new Canvas(this.mColoringBitmap);
         this.mPath = new Path();
         this.mPaint = new Paint();
@@ -120,8 +126,6 @@ public class ColorActivity extends AppCompatActivity implements GestureDetector.
         this.mPaint.setColor(SupportMenu.CATEGORY_MASK);
         this.mPaint.setAlpha(255);
         this.mPaint.setXfermode(null);
-        this.mIsScaling = false;
-        mSelectedTool = Tool.BRUSH;
     }
 
     @Override
@@ -130,13 +134,30 @@ public class ColorActivity extends AppCompatActivity implements GestureDetector.
         return super.onTouchEvent(event);
     }
 
+    private void setupBitmap(){
+        mColoringBitmap = Bitmap.createBitmap(Constants.WIDTH_BITMAP, Constants.HEIGHT_BITMAP, Bitmap.Config.ARGB_8888);
+        mColoringBitmap.eraseColor(Color.WHITE);
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inScaled = false;
+        BitmapFactory.Options optionsBackground = new BitmapFactory.Options();
+        options.inScaled = false;
+        this.mBackgroundBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.bg, optionsBackground);
+        this.mOverlayBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.picture_1, options);
+        mColoringBitmap = Util.overlay(mColoringBitmap, mOverlayBitmap);
+
+        renderColor.setColoringBitmap(this.mColoringBitmap);
+        renderColor.setOverlayBitmap(this.mOverlayBitmap);
+        renderColor.setBackgroundBitmap(this.mBackgroundBitmap);
+        renderColor.setScaleRatioResume(this.mScaleFactor, this.mRendererSaver.mCenterScaleX, this.mRendererSaver.mCenterScaleY, this.mRendererSaver.mDistanceX, this.mRendererSaver.mDistanceY);
+
+    }
+
     @Override
     public boolean onDown(MotionEvent event) {
         if (mSelectedTool == Tool.BRUSH) {
-            this.mPaint.setColor(getResources().getColor(R.color.colorAccent));
+            this.mPaint.setColor(mColorBush);
             this.mPaint.setXfermode(null);
-            this.handleDrawDown((event.getX() * mColoringBitmap.getWidth()) / ((float) this.surfaceView.getWidth()),
-                    (event.getY() * (mColoringBitmap.getHeight())) / ((float) this.surfaceView.getHeight()));
+            this.handleDrawDown((event.getX() * 896.0f) / ((float) surfaceView.getWidth()), (event.getY() * 896.0f) / ((float) surfaceView.getHeight()));
 
         } else if (mSelectedTool == Tool.ERASER) {
             mPaint.setColor(Color.WHITE);
@@ -272,11 +293,10 @@ public class ColorActivity extends AppCompatActivity implements GestureDetector.
         }
         long pixelX = Math.round((distanceX * pixelPerPointX) + ((1.0d + ((double) normalizedX)) * pixelPerPointX));
         long pixelY = Math.round((distanceY * pixelPerPointY) + ((1.0d + (SharePreferencesUtil.NULL_DOUBLE * ((double) normalizedY))) * pixelPerPointY));
-        mColorBucket = getResources().getColor(R.color.colorPrimary);
+
         if (pixelX >= 0 && pixelX < 896 && pixelY >= 0 && pixelY < 896) {
-            int replacementColor = getResources().getColor(R.color.colorPrimary);
             int targetColor = mColoringBitmap.getPixel((int) pixelX, (int) pixelY);
-            QueueLinearFloodFiller queueLinearFloodFiller = new QueueLinearFloodFiller(mColoringBitmap, targetColor, replacementColor);
+            QueueLinearFloodFiller queueLinearFloodFiller = new QueueLinearFloodFiller(mColoringBitmap, targetColor, mColorBucket);
             queueLinearFloodFiller.setTolerance(100);
             queueLinearFloodFiller.floodFill((int) pixelX, (int) pixelY);
             this.surfaceView.queueEvent(new Runnable() {
@@ -332,6 +352,8 @@ public class ColorActivity extends AppCompatActivity implements GestureDetector.
         this.mPath.reset();
         this.mPath.moveTo(x, y);
         this.mPath.quadTo(x, y, x, 1.0f + y);
+        // handle undo
+
         this.mCanvas.drawPath(this.mPath, this.mPaint);
         surfaceView.queueEvent(new Runnable() {
             public void run() {
@@ -390,6 +412,14 @@ public class ColorActivity extends AppCompatActivity implements GestureDetector.
             this.mPath.quadTo(this.mX, this.mY, (this.mX + x) / 2.0f, (this.mY + y) / 2.0f);
             this.mX = x;
             this.mY = y;
+            // handle undo
+          /*  paths.add(mPath);
+            paints.add(mPaint);
+            for (Path p : paths) {
+                Paint paint = paints.get(paintIndex);
+                mCanvas.drawPath(p, paint);
+                paintIndex++;
+            }*/
             this.mCanvas.drawPath(this.mPath, this.mPaint);
             this.surfaceView.queueEvent(new Runnable() {
                 public void run() {
@@ -446,13 +476,24 @@ public class ColorActivity extends AppCompatActivity implements GestureDetector.
     @OnClick(R.id.toolBush)
     void handleBush(){
         mSelectedTool = Tool.BRUSH;
+        if (isDelete && isBucket){
+            mColoringBitmap = Util.overlay(mColoringBitmap, mOverlayBitmap);
+            renderColor.setColoringBitmap(this.mColoringBitmap);
+            renderColor.setOverlayBitmap(this.mOverlayBitmap);
+            renderColor.setBackgroundBitmap(this.mBackgroundBitmap);
+            setupPaint();
+            isDelete = false;
+            isBucket = false;
+        }
     }
 
     @OnClick(R.id.toolBucket)
     void handleBucket(){
         mSelectedTool = Tool.BUCKET;
+        isBucket = true;
         if (isDelete){
-            initBitmapColor();
+            mColoringBitmap = Util.overlay(mColoringBitmap, mOverlayBitmap);
+            renderColor.setColoringBitmap(this.mColoringBitmap);
         }
 
     }
@@ -479,11 +520,17 @@ public class ColorActivity extends AppCompatActivity implements GestureDetector.
         }
 
         public void run() {
-           renderColor.floodFillRefresh();
+            renderColor.floodFillRefresh();
         }
     }
 
-    public void initBitmapColor(){
-        mColoringBitmap = Util.overlay(mColoringBitmap, mOverlayBitmap);
-    }
+   @OnClick(R.id.toolDone)
+    void handleDone(){
+       if (paths.size() > 0) {
+           undonePaths.add(paths.remove(paths.size() - 1));
+           undonePaints.add(paints.remove(paints.size() - 1));
+           mPaint.setColor(getResources().getColor(R.color.colorAccent));
+           surfaceView.queueEvent(new DeleteTool());
+       }
+  }
 }
