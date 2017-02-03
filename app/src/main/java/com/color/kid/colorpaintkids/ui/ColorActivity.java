@@ -218,10 +218,7 @@ public class ColorActivity extends AppCompatActivity implements GestureDetector.
     @Override
     public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
         if (mSelectedTool == Tool.BRUSH){
-            if (!mIsScaling){
-                this.handleDrawMove((e2.getX() * 896.0f) / ((float) this.surfaceView.getWidth()), (e2.getY() * 896.0f) / ((float) this.surfaceView.getHeight()));
-            }
-
+            this.handleDrawMove((e2.getX() * 896.0f) / ((float) this.surfaceView.getWidth()), (e2.getY() * 896.0f) / ((float) this.surfaceView.getHeight()));
         }else if (mSelectedTool == Tool.ERASER) {
             if (!mIsScaling) {
                 handleDrawMove((e2.getX() * 896.0f) / ((float) surfaceView.getWidth()), (e2.getY() * 896.0f) / ((float) surfaceView.getHeight()));
