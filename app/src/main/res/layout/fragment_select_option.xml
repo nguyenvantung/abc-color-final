@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/loading_backround">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal">
+        <ImageView
+            android:id="@+id/itemAnimal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/small_picture_1"/>
+        <ImageView
+            android:id="@+id/itemCar"
+            android:layout_toRightOf="@+id/itemAnimal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/small_picture_1"/>
+
+        <ImageView
+            android:id="@+id/itemSatan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/small_picture_1"
+            android:layout_below="@+id/itemAnimal"/>
+        <ImageView
+            android:id="@+id/itemDolphins"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/itemSatan"
+            android:layout_below="@+id/itemAnimal"
+            android:src="@drawable/small_picture_1"/>
+
+        <ImageView
+            android:id="@+id/itemDinosaur"
+            android:layout_below="@+id/itemSatan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/small_picture_1"/>
+        <ImageView
+            android:id="@+id/itemHorse"
+            android:layout_below="@+id/itemSatan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/itemDinosaur"
+            android:src="@drawable/small_picture_1"/>
+
+        <ImageView
+            android:id="@+id/itemTrain"
+            android:layout_below="@+id/itemDinosaur"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/small_picture_1"/>
+
+        <ImageView
+            android:id="@+id/itemHouse"
+            android:layout_below="@+id/itemDinosaur"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/itemTrain"
+            android:src="@drawable/small_picture_1"/>
+
+        <ImageView
+            android:id="@+id/itemParty"
+            android:layout_below="@+id/itemTrain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/small_picture_1"/>
+
+        <ImageView
+            android:id="@+id/ItemMermaids"
+            android:layout_below="@+id/itemTrain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/itemParty"
+            android:src="@drawable/small_picture_1"/>
+    </RelativeLayout>
+
+</ScrollView>

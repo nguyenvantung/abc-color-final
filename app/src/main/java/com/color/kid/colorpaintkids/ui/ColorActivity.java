@@ -19,6 +19,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.color.kid.colorpaintkids.R;
+import com.color.kid.colorpaintkids.constance.ConstantSource;
 import com.color.kid.colorpaintkids.constance.Constants;
 import com.color.kid.colorpaintkids.util.QueueLinearFloodFiller;
 import com.color.kid.colorpaintkids.util.SharePreferencesUtil;
@@ -71,6 +72,8 @@ public class ColorActivity extends AppCompatActivity implements GestureDetector.
     private int mColorBush;
     private int mColorBucket;
 
+    private int positionData = 0;
+
 
     public enum Tool {
         BRUSH,
@@ -89,7 +92,7 @@ public class ColorActivity extends AppCompatActivity implements GestureDetector.
         setContentView(R.layout.activity_color);
 
         ButterKnife.bind(this);
-
+        positionData = getIntent().getExtras().getInt(Constants.KEY_DRAWABLE);
         intitData();
         mColorBush = getResources().getColor(R.color.colorAccent);
         mColorBucket = getResources().getColor(R.color.colorPrimary);
@@ -142,7 +145,7 @@ public class ColorActivity extends AppCompatActivity implements GestureDetector.
         BitmapFactory.Options optionsBackground = new BitmapFactory.Options();
         options.inScaled = false;
         this.mBackgroundBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.bg, optionsBackground);
-        this.mOverlayBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.picture_1, options);
+        this.mOverlayBitmap = BitmapFactory.decodeResource(getResources(), ConstantSource.listAminalDraw[positionData], options);
         mColoringBitmap = Util.overlay(mColoringBitmap, mOverlayBitmap);
 
         renderColor.setColoringBitmap(this.mColoringBitmap);

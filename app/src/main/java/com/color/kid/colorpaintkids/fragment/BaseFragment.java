@@ -47,6 +47,7 @@ public abstract class BaseFragment  extends Fragment {
         rootView = null;
     }
 
+
     abstract protected int getLayoutId();
 
     abstract protected void initView(View root);
