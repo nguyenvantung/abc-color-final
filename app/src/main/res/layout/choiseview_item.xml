@@ -8,7 +8,7 @@
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:scaleType="centerInside"
-        android:src="@drawable/group_1_puzzle_1"
+        android:src="@drawable/small_picture_1"
         android:background="@drawable/share_image_bgr"/>
 
 </LinearLayout>
