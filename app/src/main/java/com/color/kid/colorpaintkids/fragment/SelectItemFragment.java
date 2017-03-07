@@ -81,7 +81,10 @@ public class SelectItemFragment extends BaseFragment {
         int[] integerList = null;
         switch (position){
             case Constants.AMINAL:
-                integerList = ConstantSource.listAminal;
+                integerList = ConstantSource.listAminalDraw;
+                break;
+            case Constants.CARS:
+                integerList = ConstantSource.listCarDraw;
                 break;
 
         }
