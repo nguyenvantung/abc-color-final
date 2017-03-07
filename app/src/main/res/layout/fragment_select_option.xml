@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/loading_backround"
     android:orientation="vertical">
 
@@ -10,88 +10,87 @@
         android:id="@+id/listOption"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_above="@+id/adView">
+        android:layout_above="@+id/adView"
+        android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp"
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/itemAnimal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/small_picture_1" />
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/aminal" />
 
             <ImageView
                 android:id="@+id/itemCar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/itemAnimal"
-                android:src="@drawable/small_picture_1" />
+                android:src="@drawable/car" />
 
             <ImageView
                 android:id="@+id/itemSatan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
                 android:layout_below="@+id/itemAnimal"
-                android:src="@drawable/small_picture_1" />
+                android:layout_marginRight="10dp"
+                android:src="@drawable/satan" />
 
             <ImageView
                 android:id="@+id/itemDolphins"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
                 android:layout_below="@+id/itemAnimal"
+                android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/itemSatan"
-                android:src="@drawable/small_picture_1" />
+                android:src="@drawable/fish" />
 
-            <ImageView
-                android:id="@+id/itemDinosaur"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/itemSatan"
-                android:src="@drawable/small_picture_1" />
-
-            <ImageView
-                android:id="@+id/itemHorse"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/itemSatan"
-                android:layout_toRightOf="@+id/itemDinosaur"
-                android:src="@drawable/small_picture_1" />
-
-            <ImageView
-                android:id="@+id/itemTrain"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/itemDinosaur"
-                android:src="@drawable/small_picture_1" />
-
-            <ImageView
-                android:id="@+id/itemHouse"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/itemDinosaur"
-                android:layout_toRightOf="@+id/itemTrain"
-                android:src="@drawable/small_picture_1" />
 
             <ImageView
                 android:id="@+id/itemParty"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/itemTrain"
-                android:src="@drawable/small_picture_1" />
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_below="@+id/itemFruit"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/mickey" />
 
             <ImageView
                 android:id="@+id/itemMermaids"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/itemTrain"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toEndOf="@+id/itemFruit"
+                android:layout_toRightOf="@+id/itemFruit"
+                android:src="@drawable/mermaids" />
+
+            <ImageView
+                android:id="@+id/itemFruit"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_alignLeft="@+id/itemSatan"
+                android:layout_alignStart="@+id/itemSatan"
+                android:layout_below="@+id/itemSatan"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/fruit" />
+
+            <ImageView
+                android:id="@+id/itemFly"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_below="@+id/itemDolphins"
+                android:layout_marginLeft="10dp"
+                android:layout_toEndOf="@+id/itemParty"
                 android:layout_toRightOf="@+id/itemParty"
-                android:src="@drawable/small_picture_1" />
+                android:src="@drawable/fly" />
         </RelativeLayout>
 
     </ScrollView>
@@ -100,11 +99,10 @@
         android:id="@+id/adView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
-    </com.google.android.gms.ads.AdView>
+        ads:adUnitId="ca-app-pub-3940256099942544/6300978111"></com.google.android.gms.ads.AdView>
 
 
 </RelativeLayout>

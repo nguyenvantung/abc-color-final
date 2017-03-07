@@ -75,7 +75,7 @@ public class SelectOptionFragment extends BaseFragment {
         FragmentUtil.pushFragment(getActivity(), SelectItemFragment.newInstance(Constants.AMINAL), null);
     }
 
-    @OnClick(R.id.itemDinosaur)
+    @OnClick(R.id.itemFruit)
     void gotoListDinosaur(){
         FragmentUtil.pushFragment(getActivity(), SelectItemFragment.newInstance(Constants.AMINAL), null);
     }
@@ -85,7 +85,7 @@ public class SelectOptionFragment extends BaseFragment {
         FragmentUtil.pushFragment(getActivity(), SelectItemFragment.newInstance(Constants.AMINAL), null);
     }
 
-    @OnClick(R.id.itemHorse)
+    @OnClick(R.id.itemFly)
     void gotoListHorse(){
         FragmentUtil.pushFragment(getActivity(), SelectItemFragment.newInstance(Constants.AMINAL), null);
     }
