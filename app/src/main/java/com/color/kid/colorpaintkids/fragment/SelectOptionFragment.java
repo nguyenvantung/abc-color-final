@@ -90,10 +90,6 @@ public class SelectOptionFragment extends BaseFragment {
         FragmentUtil.pushFragment(getActivity(), SelectItemFragment.newInstance(Constants.AMINAL), null);
     }
 
-    @OnClick(R.id.itemHouse)
-    void gotoListHouse(){
-        FragmentUtil.pushFragment(getActivity(), SelectItemFragment.newInstance(Constants.AMINAL), null);
-    }
 
     @OnClick(R.id.itemParty)
     void gotoListParty(){
@@ -105,10 +101,6 @@ public class SelectOptionFragment extends BaseFragment {
         FragmentUtil.pushFragment(getActivity(), SelectItemFragment.newInstance(Constants.AMINAL), null);
     }
 
-    @OnClick(R.id.itemTrain)
-    void gotoListTrain(){
-        FragmentUtil.pushFragment(getActivity(), SelectItemFragment.newInstance(Constants.AMINAL), null);
-    }
 
     @OnClick(R.id.itemMermaids)
     void gotoListMermaids(){
