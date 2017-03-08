@@ -86,6 +86,13 @@ public class SelectItemFragment extends BaseFragment {
             case Constants.CARS:
                 integerList = ConstantSource.listCarDraw;
                 break;
+            case Constants.FOOD:
+                integerList = ConstantSource.listFoodDraw;
+                break;
+            case Constants.MICKEY:
+                integerList = ConstantSource.listMickeyDraw;
+                break;
+
 
         }
         return integerList;

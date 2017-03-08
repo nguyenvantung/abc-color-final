@@ -52,4 +52,16 @@ public class ConstantSource {
             R.drawable.food_6, R.drawable.food_7, R.drawable.food_8, R.drawable.food_9, R.drawable.food_10, R.drawable.food_11,
             R.drawable.food_12, R.drawable.food_13, R.drawable.food_14, R.drawable.food_15
     };
+
+    public static int[] listMickeyDraw = {R.drawable.mickey_1, R.drawable.mickey_2, R.drawable.mickey_3, R.drawable.mickey_4, R.drawable.mickey_5,
+            R.drawable.mickey_6, R.drawable.mickey_7, R.drawable.mickey_8, R.drawable.mickey_9, R.drawable.mickey_10
+
+    };
+
+
+    public static int[] listColorTool = {R.color.aquamarine, R.color.beige, R.color.black, R.color.blue, R.color.bright_green,
+            R.color.aquamarine, R.color.aquamarine, R.color.aquamarine, R.color.aquamarine, R.color.aquamarine,
+            R.color.brown, R.color.copper, R.color.crimson, R.color.gold, R.color.green,
+            R.color.grey, R.color.light_blue, R.color.magenta, R.color.orange, R.color.pink,
+            R.color.purple, R.color.red, R.color.vailet, R.color.white, R.color.yellow,};
 }
