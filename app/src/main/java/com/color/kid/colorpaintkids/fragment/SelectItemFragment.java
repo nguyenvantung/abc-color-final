@@ -62,35 +62,32 @@ public class SelectItemFragment extends BaseFragment {
     @Override
     protected void initData() {
         option = this.getArguments().getInt(Constants.KEY_OPTION);
-        setTitle(option);
         ChoiseFragmentAdapter adapter = new ChoiseFragmentAdapter(getDataList(option));
         recyclerView.setAdapter(adapter);
     }
 
-    public void setTitle(int option){
-        switch (option){
-            case Constants.AMINAL:
-                tvTitle.setText("Aminal");
-                break;
-            default:
-                tvTitle.setText("Aminal");
-        }
-    }
 
     private int[] getDataList(int position){
         int[] integerList = null;
         switch (position){
             case Constants.AMINAL:
                 integerList = ConstantSource.listAminalDraw;
+                tvTitle.setText("Aminal");
                 break;
             case Constants.CARS:
                 integerList = ConstantSource.listCarDraw;
+                tvTitle.setText("Cars");
                 break;
             case Constants.FOOD:
                 integerList = ConstantSource.listFoodDraw;
+                tvTitle.setText("Food");
                 break;
             case Constants.MICKEY:
                 integerList = ConstantSource.listMickeyDraw;
+                tvTitle.setText("Mickey");
+                break;
+            default:
+                tvTitle.setText("Aminal");
                 break;
 
 

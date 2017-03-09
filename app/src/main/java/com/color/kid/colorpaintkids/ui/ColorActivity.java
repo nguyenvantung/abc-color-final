@@ -13,17 +13,23 @@ import android.os.Bundle;
 import android.support.v4.internal.view.SupportMenu;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 
 import com.color.kid.colorpaintkids.R;
+import com.color.kid.colorpaintkids.adapter.OptionColorAdapter;
+import com.color.kid.colorpaintkids.adapter.viewHolder.ColorViewHolder;
 import com.color.kid.colorpaintkids.constance.ConstantSource;
 import com.color.kid.colorpaintkids.constance.Constants;
 import com.color.kid.colorpaintkids.util.QueueLinearFloodFiller;
 import com.color.kid.colorpaintkids.util.SharePreferencesUtil;
 import com.color.kid.colorpaintkids.util.Util;
+import com.color.kid.colorpaintkids.view.ItemOffsetDecoration;
 import com.color.kid.colorpaintkids.view.RenderColor;
 
 import java.util.ArrayList;
@@ -36,10 +42,28 @@ import butterknife.OnClick;
  * Created by Tung on 1/18/2017.
  */
 
-public class ColorActivity extends AppCompatActivity implements GestureDetector.OnGestureListener {
+public class ColorActivity extends AppCompatActivity implements GestureDetector.OnGestureListener, ColorViewHolder.SelectItemColor {
 
     @Bind(R.id.surfaceView)
     GLSurfaceView surfaceView;
+
+    @Bind(R.id.listToolColor)
+    RecyclerView listToolColor;
+
+    @Bind(R.id.toolBucket)
+    ImageView imgBucket;
+
+    @Bind(R.id.toolBush)
+    ImageView imgBush;
+
+    @Bind(R.id.toolEraser)
+    ImageView imgEraser;
+
+    @Bind(R.id.toolDelete)
+    ImageView imgDelete;
+
+    @Bind(R.id.toolDone)
+    ImageView imgDone;
 
     private RenderColor renderColor;
     private ColoringGLRendererSaver mRendererSaver;
@@ -69,11 +93,14 @@ public class ColorActivity extends AppCompatActivity implements GestureDetector.
     private ArrayList<Path> undonePaths = new ArrayList<Path>();
     private ArrayList<Paint> undonePaints = new ArrayList<Paint>();
     private int paintIndex = 0;
-    private int mColorBush;
-    private int mColorBucket;
 
-    private int positionData = 0;
+    private int drawableData = 0;
+    private int colorDraw;
 
+    @Override
+    public void onSelectColor(int color) {
+       colorDraw = getResources().getColor(color);
+    }
 
     public enum Tool {
         BRUSH,
@@ -92,28 +119,34 @@ public class ColorActivity extends AppCompatActivity implements GestureDetector.
         setContentView(R.layout.activity_color);
 
         ButterKnife.bind(this);
-        positionData = getIntent().getExtras().getInt(Constants.KEY_DRAWABLE);
+
         intitData();
-        mColorBush = getResources().getColor(R.color.colorAccent);
-        mColorBucket = getResources().getColor(R.color.colorPrimary);
 
     }
 
     public void intitData() {
+        drawableData = getIntent().getExtras().getInt(Constants.KEY_DRAWABLE);
         surfaceView.setEGLContextClientVersion(2);
-
+        colorDraw = getResources().getColor(R.color.aquamarine);
         renderColor = new RenderColor(this);
         mRendererSaver = new ColoringGLRendererSaver();
         setupBitmap();
-
 
         surfaceView.setRenderer(renderColor);
         gestureDetectorCompat = new GestureDetectorCompat(this, this);
         this.mRendererSet = true;
 
-       setupPaint();
+        setupPaint();
         this.mIsScaling = false;
         mSelectedTool = Tool.BRUSH;
+        imgBush.setSelected(true);
+
+        listToolColor.setLayoutManager(new GridLayoutManager(this, 2, GridLayoutManager.HORIZONTAL, false));
+        ItemOffsetDecoration itemDecoration = new ItemOffsetDecoration(this, R.dimen.item_color);
+        listToolColor.addItemDecoration(itemDecoration);
+        OptionColorAdapter optionColorAdapter = new OptionColorAdapter();
+        optionColorAdapter.setSelectItemColor(this);
+        listToolColor.setAdapter(optionColorAdapter);
     }
 
     public void setupPaint(){
@@ -139,13 +172,13 @@ public class ColorActivity extends AppCompatActivity implements GestureDetector.
 
     private void setupBitmap(){
         mColoringBitmap = Bitmap.createBitmap(Constants.WIDTH_BITMAP, Constants.HEIGHT_BITMAP, Bitmap.Config.ARGB_8888);
-        mColoringBitmap.eraseColor(Color.WHITE);
+        mColoringBitmap.eraseColor(getColor(R.color.white));
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inScaled = false;
         BitmapFactory.Options optionsBackground = new BitmapFactory.Options();
         options.inScaled = false;
         this.mBackgroundBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.bg, optionsBackground);
-        this.mOverlayBitmap = BitmapFactory.decodeResource(getResources(), ConstantSource.listAminalDraw[positionData], options);
+        this.mOverlayBitmap = BitmapFactory.decodeResource(getResources(), drawableData, options);
         mColoringBitmap = Util.overlay(mColoringBitmap, mOverlayBitmap);
 
         renderColor.setColoringBitmap(this.mColoringBitmap);
@@ -158,7 +191,7 @@ public class ColorActivity extends AppCompatActivity implements GestureDetector.
     @Override
     public boolean onDown(MotionEvent event) {
         if (mSelectedTool == Tool.BRUSH) {
-            this.mPaint.setColor(mColorBush);
+            this.mPaint.setColor(colorDraw);
             this.mPaint.setXfermode(null);
             this.handleDrawDown((event.getX() * 896.0f) / ((float) surfaceView.getWidth()), (event.getY() * 896.0f) / ((float) surfaceView.getHeight()));
 
@@ -296,7 +329,7 @@ public class ColorActivity extends AppCompatActivity implements GestureDetector.
 
         if (pixelX >= 0 && pixelX < 896 && pixelY >= 0 && pixelY < 896) {
             int targetColor = mColoringBitmap.getPixel((int) pixelX, (int) pixelY);
-            QueueLinearFloodFiller queueLinearFloodFiller = new QueueLinearFloodFiller(mColoringBitmap, targetColor, mColorBucket);
+            QueueLinearFloodFiller queueLinearFloodFiller = new QueueLinearFloodFiller(mColoringBitmap, targetColor, colorDraw);
             queueLinearFloodFiller.setTolerance(100);
             queueLinearFloodFiller.floodFill((int) pixelX, (int) pixelY);
             this.surfaceView.queueEvent(new Runnable() {
@@ -485,6 +518,9 @@ public class ColorActivity extends AppCompatActivity implements GestureDetector.
             isDelete = false;
             isBucket = false;
         }
+        imgBucket.setSelected(false);
+        imgBush.setSelected(true);
+        imgEraser.setSelected(false);
     }
 
     @OnClick(R.id.toolBucket)
@@ -496,11 +532,18 @@ public class ColorActivity extends AppCompatActivity implements GestureDetector.
             renderColor.setColoringBitmap(this.mColoringBitmap);
         }
 
+        imgBucket.setSelected(true);
+        imgBush.setSelected(false);
+        imgEraser.setSelected(false);
+
     }
 
     @OnClick(R.id.toolEraser)
     void handleEraser(){
         mSelectedTool = Tool.ERASER;
+        imgBucket.setSelected(false);
+        imgBush.setSelected(false);
+        imgEraser.setSelected(true);
     }
 
     @OnClick(R.id.toolZoom)

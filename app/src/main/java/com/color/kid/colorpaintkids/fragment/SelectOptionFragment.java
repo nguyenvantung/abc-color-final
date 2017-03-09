@@ -72,12 +72,12 @@ public class SelectOptionFragment extends BaseFragment {
 
     @OnClick(R.id.itemCar)
     void gotoListCar(){
-        FragmentUtil.pushFragment(getActivity(), SelectItemFragment.newInstance(Constants.AMINAL), null);
+        FragmentUtil.pushFragment(getActivity(), SelectItemFragment.newInstance(Constants.CARS), null);
     }
 
     @OnClick(R.id.itemFruit)
     void gotoListDinosaur(){
-        FragmentUtil.pushFragment(getActivity(), SelectItemFragment.newInstance(Constants.AMINAL), null);
+        FragmentUtil.pushFragment(getActivity(), SelectItemFragment.newInstance(Constants.FOOD), null);
     }
 
     @OnClick(R.id.itemDolphins)
@@ -91,9 +91,9 @@ public class SelectOptionFragment extends BaseFragment {
     }
 
 
-    @OnClick(R.id.itemParty)
+    @OnClick(R.id.itemMickey)
     void gotoListParty(){
-        FragmentUtil.pushFragment(getActivity(), SelectItemFragment.newInstance(Constants.AMINAL), null);
+        FragmentUtil.pushFragment(getActivity(), SelectItemFragment.newInstance(Constants.MICKEY), null);
     }
 
     @OnClick(R.id.itemSatan)

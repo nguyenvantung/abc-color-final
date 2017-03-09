@@ -33,6 +33,6 @@ public class SplashFragment extends BaseFragment {
     }
 
     public void nextScreen() {
-        FragmentUtil.replaceFragment(getActivity(), new SelectOptionFragment(), null);
+        FragmentUtil.showFragment(getActivity(), new SelectOptionFragment(), false, null, null, false);
     }
 }

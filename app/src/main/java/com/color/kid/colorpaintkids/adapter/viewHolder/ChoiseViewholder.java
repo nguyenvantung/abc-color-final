@@ -36,7 +36,7 @@ public class ChoiseViewholder extends RecyclerView.ViewHolder implements View.On
     @Override
     public void onClick(View view) {
         Intent intent = new Intent((FragmentActivity)itemView.getContext(), ColorActivity.class);
-        intent.putExtra(Constants.KEY_DRAWABLE, getAdapterPosition());
+        intent.putExtra(Constants.KEY_DRAWABLE, drawableData);
         itemView.getContext().startActivity(intent);
     }
 }

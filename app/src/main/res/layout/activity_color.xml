@@ -12,7 +12,7 @@
     <include
         android:id="@+id/header"
         layout="@layout/layout_tool_color"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="70dp" />
 
 
@@ -24,7 +24,7 @@
         android:background="@drawable/play_color_bar"
         android:visibility="visible">
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/horizontal_color"
+            android:id="@+id/listToolColor"
             android:layout_width="match_parent"
             android:layout_height="80dp"/>
     </RelativeLayout>

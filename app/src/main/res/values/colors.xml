@@ -4,11 +4,6 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="select_picture_text_start">#ffefd17e</color>
-    <color name="select_picture_text_ends">#ffefb700</color>
-    <color name="select_picture_text_outline">#ffffffff</color>
-    <color name="select_picture_text_shadow">#ff88671a</color>
-
 
     <color name="notification_action_color_filter">#ffffffff</color>
     <color name="abc_input_method_navigation_guard">@android:color/black</color>

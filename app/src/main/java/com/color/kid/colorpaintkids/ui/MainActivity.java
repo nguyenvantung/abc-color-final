@@ -18,10 +18,6 @@ public class MainActivity extends FragmentActivity {
 
     @Override
     public void onBackPressed() {
-        if (getFragmentManager().getBackStackEntryCount() == 0) {
-            this.finish();
-        } else {
             super.onBackPressed(); //replaced
-        }
     }
 }
