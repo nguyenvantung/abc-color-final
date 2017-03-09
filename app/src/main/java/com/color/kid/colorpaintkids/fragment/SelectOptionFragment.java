@@ -104,7 +104,7 @@ public class SelectOptionFragment extends BaseFragment {
 
     @OnClick(R.id.itemMermaids)
     void gotoListMermaids(){
-        FragmentUtil.pushFragment(getActivity(), SelectItemFragment.newInstance(Constants.AMINAL), null);
+        FragmentUtil.pushFragment(getActivity(), SelectItemFragment.newInstance(Constants.MERMAIDS), null);
     }
 
 }

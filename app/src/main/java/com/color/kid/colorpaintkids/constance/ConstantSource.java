@@ -55,7 +55,14 @@ public class ConstantSource {
     };
 
     public static int[] listMickeyDraw = {R.drawable.mickey_1, R.drawable.mickey_2, R.drawable.mickey_3, R.drawable.mickey_4, R.drawable.mickey_5,
-            R.drawable.mickey_6, R.drawable.mickey_7, R.drawable.mickey_8, R.drawable.mickey_9, R.drawable.mickey_10
+            R.drawable.mickey_6, R.drawable.mickey_7, R.drawable.mickey_8, R.drawable.mickey_9, R.drawable.mickey_10,
+            R.drawable.mickey_11, R.drawable.mickey_12, R.drawable.mickey_13, R.drawable.mickey_14
+
+    };
+
+    public static int[] listpeopleDraw = {R.drawable.people_14, R.drawable.people_1, R.drawable.people_2, R.drawable.people_3, R.drawable.people_4, R.drawable.people_5,
+            R.drawable.people_6, R.drawable.people_7, R.drawable.people_8, R.drawable.people_9, R.drawable.people_10,
+            R.drawable.people_11, R.drawable.people_12, R.drawable.people_13
 
     };
 
