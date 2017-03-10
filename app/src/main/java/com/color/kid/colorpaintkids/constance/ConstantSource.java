@@ -62,7 +62,8 @@ public class ConstantSource {
 
     public static int[] listpeopleDraw = {R.drawable.people_14, R.drawable.people_1, R.drawable.people_2, R.drawable.people_3, R.drawable.people_4, R.drawable.people_5,
             R.drawable.people_6, R.drawable.people_7, R.drawable.people_8, R.drawable.people_9, R.drawable.people_10,
-            R.drawable.people_11, R.drawable.people_12, R.drawable.people_13
+            R.drawable.people_11, R.drawable.people_12, R.drawable.people_13,R.drawable.people_15, R.drawable.people_16,
+            R.drawable.people_17,R.drawable.people_18,R.drawable.people_19, R.drawable.people_20,
 
     };
 
@@ -71,4 +72,10 @@ public class ConstantSource {
             R.color.brown, R.color.copper, R.color.crimson, R.color.gold, R.color.green,
             R.color.grey, R.color.light_blue, R.color.magenta, R.color.orange, R.color.pink,
             R.color.purple, R.color.red, R.color.vailet, R.color.white, R.color.yellow,};
+
+    public static int[] listSantaDraw = {R.drawable.santa_1, R.drawable.santa_2, R.drawable.santa_3, R.drawable.santa_4, R.drawable.santa_5,
+            R.drawable.santa_6, R.drawable.santa_7, R.drawable.santa_8, R.drawable.santa_9, R.drawable.santa_10,
+            R.drawable.santa_11, R.drawable.santa_12, R.drawable.santa_13, R.drawable.santa_14, R.drawable.santa_15, R.drawable.santa_16
+
+    };
 }

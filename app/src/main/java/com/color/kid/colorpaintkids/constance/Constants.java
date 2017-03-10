@@ -12,11 +12,7 @@ public class Constants {
     public static final int CARS = 2;
     public static final int FOOD = 3;
     public static final int MICKEY = 4;
-    public static final int DINOSAUR = 5;
-    public static final int HORSE = 6;
-    public static final int TRAINS = 7;
-    public static final int HOUSE = 8;
-    public static final int PARTY = 9;
+    public static final int SANTA = 5;
     public static final int MERMAIDS = 10;
 
 

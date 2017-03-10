@@ -37,6 +37,7 @@
                 android:src="@drawable/car" />
 
             <ImageView
+                android:layout_marginTop="20dp"
                 android:id="@+id/itemSatan"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
@@ -44,23 +45,6 @@
                 android:layout_marginRight="10dp"
                 android:src="@drawable/satan" />
 
-            <ImageView
-                android:id="@+id/itemDolphins"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_below="@+id/itemAnimal"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@+id/itemSatan"
-                android:src="@drawable/fish" />
-
-
-            <ImageView
-                android:id="@+id/itemMickey"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_below="@+id/itemFruit"
-                android:layout_marginRight="10dp"
-                android:src="@drawable/mickey" />
 
             <ImageView
                 android:id="@+id/itemMermaids"
@@ -68,29 +52,29 @@
                 android:layout_height="150dp"
                 android:layout_alignParentBottom="true"
                 android:layout_marginLeft="10dp"
-                android:layout_toEndOf="@+id/itemFruit"
-                android:layout_toRightOf="@+id/itemFruit"
+                android:layout_toRightOf="@+id/itemMickey"
                 android:src="@drawable/mermaids" />
 
             <ImageView
                 android:id="@+id/itemFruit"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:layout_alignLeft="@+id/itemSatan"
-                android:layout_alignStart="@+id/itemSatan"
-                android:layout_below="@+id/itemSatan"
+                android:layout_below="@+id/itemCar"
                 android:layout_marginRight="10dp"
+                android:layout_toRightOf="@+id/itemSatan"
                 android:src="@drawable/fruit" />
 
             <ImageView
-                android:id="@+id/itemFly"
+                android:id="@+id/itemMickey"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:layout_below="@+id/itemDolphins"
-                android:layout_marginLeft="10dp"
-                android:layout_toEndOf="@+id/itemMickey"
-                android:layout_toRightOf="@+id/itemMickey"
-                android:src="@drawable/fly" />
+                android:layout_marginTop="31dp"
+                android:src="@drawable/mickey"
+                android:layout_below="@+id/itemSatan"
+                android:layout_alignLeft="@+id/itemSatan"
+                android:layout_alignStart="@+id/itemSatan" />
+
+
         </RelativeLayout>
 
     </ScrollView>

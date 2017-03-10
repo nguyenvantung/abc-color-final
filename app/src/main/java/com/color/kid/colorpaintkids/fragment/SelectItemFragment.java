@@ -90,6 +90,10 @@ public class SelectItemFragment extends BaseFragment {
                 integerList = ConstantSource.listpeopleDraw;
                 tvTitle.setText("People");
                 break;
+            case Constants.SANTA:
+                integerList = ConstantSource.listSantaDraw;
+                tvTitle.setText("Santa");
+                break;
             default:
                 tvTitle.setText("Aminal");
                 break;

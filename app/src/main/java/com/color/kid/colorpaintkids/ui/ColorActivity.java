@@ -1,5 +1,7 @@
 package com.color.kid.colorpaintkids.ui;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -9,10 +11,13 @@ import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.opengl.GLSurfaceView;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.internal.view.SupportMenu;
 import android.support.v4.view.GestureDetectorCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.GestureDetector;
@@ -20,15 +25,17 @@ import android.view.MotionEvent;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.color.kid.colorpaintkids.R;
 import com.color.kid.colorpaintkids.adapter.OptionColorAdapter;
 import com.color.kid.colorpaintkids.adapter.viewHolder.ColorViewHolder;
-import com.color.kid.colorpaintkids.constance.ConstantSource;
 import com.color.kid.colorpaintkids.constance.Constants;
+import com.color.kid.colorpaintkids.util.DebugLog;
 import com.color.kid.colorpaintkids.util.QueueLinearFloodFiller;
 import com.color.kid.colorpaintkids.util.SharePreferencesUtil;
 import com.color.kid.colorpaintkids.util.Util;
+import com.color.kid.colorpaintkids.view.DialogShareImage;
 import com.color.kid.colorpaintkids.view.ItemOffsetDecoration;
 import com.color.kid.colorpaintkids.view.RenderColor;
 
@@ -42,8 +49,9 @@ import butterknife.OnClick;
  * Created by Tung on 1/18/2017.
  */
 
-public class ColorActivity extends AppCompatActivity implements GestureDetector.OnGestureListener, ColorViewHolder.SelectItemColor {
+public class ColorActivity extends FragmentActivity implements GestureDetector.OnGestureListener, ColorViewHolder.SelectItemColor {
 
+    private static final int PERMISSON_READ_EXTERNAL_STORAGE = 69;
     @Bind(R.id.surfaceView)
     GLSurfaceView surfaceView;
 
@@ -575,5 +583,41 @@ public class ColorActivity extends AppCompatActivity implements GestureDetector.
            mPaint.setColor(getResources().getColor(R.color.colorAccent));
            surfaceView.queueEvent(new DeleteTool());
        }
+       checkPermission();
+
   }
+
+    private boolean checkWriteExternalPermission(){
+        String permission = "android.permission.WRITE_EXTERNAL_STORAGE";
+        int res = this.checkCallingOrSelfPermission(permission);
+        return (res == PackageManager.PERMISSION_GRANTED);
+    }
+    private void checkPermission(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !checkWriteExternalPermission()) {
+            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSON_READ_EXTERNAL_STORAGE);
+        } else {
+            showDialogShare();
+        }
+    }
+
+    public void showDialogShare(){
+        DialogShareImage dialogShareImage = new DialogShareImage(this, mColoringBitmap);
+        dialogShareImage.setDrawableData(drawableData);
+        dialogShareImage.show();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode){
+            case PERMISSON_READ_EXTERNAL_STORAGE:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    DebugLog.e("Permission" + "Granted");
+                    showDialogShare();
+                }
+
+                break;
+        }
+    }
 }

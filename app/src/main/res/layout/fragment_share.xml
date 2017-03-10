@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/loading_backround"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/titleShare"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Share \nyour Image" />
+
+    <ImageView
+        android:id="@+id/imgShare"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/layoutButton"
+        android:layout_below="@+id/titleShare"
+        android:layout_margin="10dp" />
+
+    <LinearLayout
+        android:id="@+id/layoutButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="21dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <ImageView
+            android:id="@+id/buttonCancel"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/cancel_button"
+            android:layout_marginRight="10dp"/>
+
+        <ImageView
+            android:id="@+id/buttonShare"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/share_button"
+            android:layout_marginLeft="10dp"/>
+    </LinearLayout>
+
+
+</RelativeLayout>
