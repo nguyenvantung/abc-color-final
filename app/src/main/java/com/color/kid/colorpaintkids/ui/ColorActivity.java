@@ -10,10 +10,10 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
+import android.media.MediaPlayer;
 import android.opengl.GLSurfaceView;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.internal.view.SupportMenu;
@@ -25,7 +25,6 @@ import android.view.MotionEvent;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.color.kid.colorpaintkids.R;
 import com.color.kid.colorpaintkids.adapter.OptionColorAdapter;
@@ -100,10 +99,11 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
 
     private ArrayList<Path> undonePaths = new ArrayList<Path>();
     private ArrayList<Paint> undonePaints = new ArrayList<Paint>();
-    private int paintIndex = 0;
 
     private int drawableData = 0;
     private int colorDraw;
+
+    private MediaPlayer mediaPlayer;
 
     @Override
     public void onSelectColor(int color) {
@@ -135,6 +135,10 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
     public void intitData() {
         drawableData = getIntent().getExtras().getInt(Constants.KEY_DRAWABLE);
         surfaceView.setEGLContextClientVersion(2);
+
+        mediaPlayer = MediaPlayer.create(this, R.raw.bgr_happy_sunshine);
+        mediaPlayer.start();
+        mediaPlayer.setLooping(true);
         colorDraw = getResources().getColor(R.color.aquamarine);
         renderColor = new RenderColor(this);
         mRendererSaver = new ColoringGLRendererSaver();
@@ -491,6 +495,9 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
         if (this.mRendererSet) {
             surfaceView.onResume();
         }
+        if (mediaPlayer != null && !mediaPlayer.isPlaying()){
+            mediaPlayer.start();
+        }
     }
 
     public void onPause() {
@@ -504,6 +511,7 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
             this.mRendererSaver.mDistanceX = this.renderColor.getDistanceX();
             this.mRendererSaver.mDistanceY = this.renderColor.getDistanceY();
         }
+        mediaPlayer.pause();
     }
 
     @Override
@@ -512,6 +520,7 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
         if (this.renderColor != null) {
             this.renderColor.onDestroyView();
         }
+        mediaPlayer.stop();
     }
 
     @OnClick(R.id.toolBush)
@@ -620,4 +629,6 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
                 break;
         }
     }
+
+
 }

@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import com.color.kid.colorpaintkids.R;
 import com.color.kid.colorpaintkids.constance.Constants;
 import com.color.kid.colorpaintkids.ui.ColorActivity;
+import com.color.kid.colorpaintkids.util.Util;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -38,5 +39,6 @@ public class ChoiseViewholder extends RecyclerView.ViewHolder implements View.On
         Intent intent = new Intent((FragmentActivity)itemView.getContext(), ColorActivity.class);
         intent.putExtra(Constants.KEY_DRAWABLE, drawableData);
         itemView.getContext().startActivity(intent);
+        Util.playSong(itemView.getContext(), R.raw.sf_0);
     }
 }

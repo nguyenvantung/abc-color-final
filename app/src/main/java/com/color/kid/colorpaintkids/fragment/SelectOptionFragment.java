@@ -1,14 +1,18 @@
 package com.color.kid.colorpaintkids.fragment;
 
+import android.media.MediaPlayer;
 import android.view.View;
 
 import com.color.kid.colorpaintkids.R;
 import com.color.kid.colorpaintkids.constance.Constants;
 import com.color.kid.colorpaintkids.util.FragmentUtil;
+import com.color.kid.colorpaintkids.util.Util;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
+
+import java.io.IOException;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -19,6 +23,7 @@ import butterknife.OnClick;
 
 public class SelectOptionFragment extends BaseFragment {
     private InterstitialAd mInterstitialAd;
+    private MediaPlayer mediaPlayer;
 
     @Bind(R.id.adView)
     AdView adView;
@@ -34,8 +39,9 @@ public class SelectOptionFragment extends BaseFragment {
 
     @Override
     protected void initData() {
-      showAdView();
+        showAdView();
     }
+
 
     public void showAdView(){
         mInterstitialAd = new InterstitialAd(getActivity());
@@ -68,33 +74,39 @@ public class SelectOptionFragment extends BaseFragment {
     @OnClick(R.id.itemAnimal)
     void gotoListAminal(){
         FragmentUtil.pushFragment(getActivity(), SelectItemFragment.newInstance(Constants.AMINAL), null);
+        Util.playSong(getActivity(), R.raw.z_textures_menu);
     }
 
     @OnClick(R.id.itemCar)
     void gotoListCar(){
         FragmentUtil.pushFragment(getActivity(), SelectItemFragment.newInstance(Constants.CARS), null);
+        Util.playSong(getActivity(), R.raw.z_textures_menu);
     }
 
     @OnClick(R.id.itemFruit)
     void gotoListDinosaur(){
         FragmentUtil.pushFragment(getActivity(), SelectItemFragment.newInstance(Constants.FOOD), null);
+        Util.playSong(getActivity(), R.raw.z_textures_menu);
     }
 
 
     @OnClick(R.id.itemMickey)
     void gotoListParty(){
         FragmentUtil.pushFragment(getActivity(), SelectItemFragment.newInstance(Constants.MICKEY), null);
+        Util.playSong(getActivity(), R.raw.z_textures_menu);
     }
 
     @OnClick(R.id.itemSatan)
     void gotoListSatan(){
         FragmentUtil.pushFragment(getActivity(), SelectItemFragment.newInstance(Constants.SANTA), null);
+        Util.playSong(getActivity(), R.raw.z_textures_menu);
     }
 
 
     @OnClick(R.id.itemMermaids)
     void gotoListMermaids(){
         FragmentUtil.pushFragment(getActivity(), SelectItemFragment.newInstance(Constants.MERMAIDS), null);
+        Util.playSong(getActivity(), R.raw.z_textures_menu);
     }
 
 }

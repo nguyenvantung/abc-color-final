@@ -1,12 +1,16 @@
 package com.color.kid.colorpaintkids.util;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
+import android.media.MediaPlayer;
 import android.os.Environment;
 import android.util.Log;
 import android.view.View;
+
+import com.color.kid.colorpaintkids.R;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -60,5 +64,10 @@ public class Util {
         Log.e("file", "" + file);
         return file;
 
+    }
+
+    public static void  playSong(Context context, int sound){
+        MediaPlayer  mediaPlayer = MediaPlayer.create(context, sound);
+        mediaPlayer.start();
     }
 }
