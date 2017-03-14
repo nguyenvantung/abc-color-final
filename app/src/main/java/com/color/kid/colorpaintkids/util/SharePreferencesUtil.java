@@ -19,7 +19,7 @@ public class SharePreferencesUtil {
     private static final String PREFERENCES_LAST_TIME_OPENED = "PREFERENCES_LAST_TIME_OPENED";
     private static final String PREFERENCES_MUSIC_SETTINGS = "PREFERENCES_MUSIC_SETTINGS";
     private static final String PREFERENCES_NUMBER_LAUNCHED = "PREFERENCES_NUMBER_LAUNCHED";
-    private static final String PREFERENCES_NUMBER_PLAYED = "PREFERENCES_NUMBER_PLAYED";
+    private static final String PREFERENCES_SOUND_PLAYED = "PREFERENCES_SOUND_PLAYED";
     private static final String PREFERENCES_PRIVACY = "PREFERENCES_PRIVACY";
     private static final String PREFERENCES_RATE_FIRST_ITEM = "PREFERENCES_RATE_FIRST_ITEM";
     private static final String PREFERENCES_SOUND_SETTINGS = "PREFERENCES_SOUND_SETTINGS";
@@ -164,13 +164,14 @@ public class SharePreferencesUtil {
         editor.apply();
     }
 
-    public void setNumberPlayed(int launch) {
+
+    public void setSoundPlayed(boolean played) {
         Editor editor = this.mSharedPreferences.edit();
-        editor.putInt(PREFERENCES_NUMBER_PLAYED, launch);
+        editor.putBoolean(PREFERENCES_SOUND_PLAYED, played);
         editor.apply();
     }
 
-    public int getNumberPlayed() {
-        return this.mSharedPreferences.getInt(PREFERENCES_NUMBER_PLAYED, 0);
+    public boolean getSoundPlayed() {
+        return this.mSharedPreferences.getBoolean(PREFERENCES_SOUND_PLAYED, false);
     }
 }

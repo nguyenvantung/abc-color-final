@@ -104,6 +104,7 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
     private int colorDraw;
 
     private MediaPlayer mediaPlayer;
+    private SharePreferencesUtil sharePreferencesUtil;
 
     @Override
     public void onSelectColor(int color) {
@@ -133,12 +134,17 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
     }
 
     public void intitData() {
+        sharePreferencesUtil = new SharePreferencesUtil(this);
         drawableData = getIntent().getExtras().getInt(Constants.KEY_DRAWABLE);
         surfaceView.setEGLContextClientVersion(2);
 
         mediaPlayer = MediaPlayer.create(this, R.raw.bgr_happy_sunshine);
-        mediaPlayer.start();
         mediaPlayer.setLooping(true);
+        if (sharePreferencesUtil.getSoundPlayed()){
+            mediaPlayer.start();
+        }
+
+
         colorDraw = getResources().getColor(R.color.aquamarine);
         renderColor = new RenderColor(this);
         mRendererSaver = new ColoringGLRendererSaver();
@@ -495,7 +501,7 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
         if (this.mRendererSet) {
             surfaceView.onResume();
         }
-        if (mediaPlayer != null && !mediaPlayer.isPlaying()){
+        if (mediaPlayer != null && !mediaPlayer.isPlaying() && sharePreferencesUtil.getSoundPlayed()){
             mediaPlayer.start();
         }
     }

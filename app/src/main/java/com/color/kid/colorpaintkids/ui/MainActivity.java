@@ -7,16 +7,22 @@ import android.support.v4.app.FragmentActivity;
 import com.color.kid.colorpaintkids.R;
 import com.color.kid.colorpaintkids.fragment.SplashFragment;
 import com.color.kid.colorpaintkids.util.FragmentUtil;
+import com.color.kid.colorpaintkids.util.SharePreferencesUtil;
 
 public class MainActivity extends FragmentActivity {
     MediaPlayer mediaPlayer;
+    SharePreferencesUtil sharePreferencesUtil;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mediaPlayer = MediaPlayer.create(this, R.raw.bgr_be_happy);
-        mediaPlayer.start();
+        sharePreferencesUtil = new SharePreferencesUtil(this);
+        if (sharePreferencesUtil.getSoundPlayed()){
+            mediaPlayer.start();
+        }
         mediaPlayer.setLooping(true);
+        sharePreferencesUtil = new SharePreferencesUtil(this);
         FragmentUtil.showFragment(this, new SplashFragment(),  false, null, null, false);
     }
 
@@ -28,7 +34,7 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (mediaPlayer != null && !mediaPlayer.isPlaying()){
+        if (mediaPlayer != null && !mediaPlayer.isPlaying() && sharePreferencesUtil.getSoundPlayed()){
             mediaPlayer.start();
         }
     }
@@ -44,4 +50,13 @@ public class MainActivity extends FragmentActivity {
         super.onDestroy();
         mediaPlayer.stop();
     }
+
+    public void playSound(boolean open){
+        if (open && !mediaPlayer.isPlaying()){
+            mediaPlayer.start();
+        }else {
+            mediaPlayer.pause();
+        }
+    }
+
 }

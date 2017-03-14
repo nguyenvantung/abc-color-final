@@ -2,10 +2,13 @@ package com.color.kid.colorpaintkids.fragment;
 
 import android.media.MediaPlayer;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.color.kid.colorpaintkids.R;
 import com.color.kid.colorpaintkids.constance.Constants;
+import com.color.kid.colorpaintkids.ui.MainActivity;
 import com.color.kid.colorpaintkids.util.FragmentUtil;
+import com.color.kid.colorpaintkids.util.SharePreferencesUtil;
 import com.color.kid.colorpaintkids.util.Util;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -23,7 +26,9 @@ import butterknife.OnClick;
 
 public class SelectOptionFragment extends BaseFragment {
     private InterstitialAd mInterstitialAd;
-    private MediaPlayer mediaPlayer;
+    SharePreferencesUtil sharePreferencesUtil;
+    @Bind(R.id.itemSound)
+    ImageView imgSound;
 
     @Bind(R.id.adView)
     AdView adView;
@@ -34,7 +39,8 @@ public class SelectOptionFragment extends BaseFragment {
 
     @Override
     protected void initView(View root) {
-
+        sharePreferencesUtil = new SharePreferencesUtil(getActivity());
+        imgSound.setSelected(sharePreferencesUtil.getSoundPlayed());
     }
 
     @Override
@@ -107,6 +113,19 @@ public class SelectOptionFragment extends BaseFragment {
     void gotoListMermaids(){
         FragmentUtil.pushFragment(getActivity(), SelectItemFragment.newInstance(Constants.MERMAIDS), null);
         Util.playSong(getActivity(), R.raw.z_textures_menu);
+    }
+
+    @OnClick(R.id.itemSound)
+    void onPlaySound(){
+        if (imgSound.isSelected()){
+            ((MainActivity)getActivity()).playSound(false);
+            sharePreferencesUtil.setSoundPlayed(false);
+            imgSound.setSelected(false);
+        }else {
+            ((MainActivity)getActivity()).playSound(true);
+            sharePreferencesUtil.setSoundPlayed(true);
+            imgSound.setSelected(true);
+        }
     }
 
 }
