@@ -1,5 +1,6 @@
 package com.color.kid.colorpaintkids.adapter.viewHolder;
 
+import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -33,7 +34,12 @@ public class ColorViewHolder extends RecyclerView.ViewHolder implements View.OnC
 
     public void setData(int color){
         this.color = color;
-       imgColor.setBackgroundColor(itemView.getContext().getColor(color));
+        if(android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            imgColor.setBackgroundColor(itemView.getContext().getResources().getColor(color, itemView.getContext().getTheme()));
+        }else {
+            imgColor.setBackgroundColor(itemView.getContext().getResources().getColor(color));
+        }
+
     }
 
     @Override

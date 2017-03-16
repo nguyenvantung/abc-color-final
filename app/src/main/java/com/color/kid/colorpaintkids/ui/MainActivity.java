@@ -8,13 +8,19 @@ import com.color.kid.colorpaintkids.R;
 import com.color.kid.colorpaintkids.fragment.SplashFragment;
 import com.color.kid.colorpaintkids.util.FragmentUtil;
 import com.color.kid.colorpaintkids.util.SharePreferencesUtil;
+import com.google.firebase.analytics.FirebaseAnalytics;
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends FragmentActivity {
     MediaPlayer mediaPlayer;
     SharePreferencesUtil sharePreferencesUtil;
+    private FirebaseAnalytics mFirebaseAnalytics;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
+        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_main);
         mediaPlayer = MediaPlayer.create(this, R.raw.bgr_be_happy);
         sharePreferencesUtil = new SharePreferencesUtil(this);
@@ -24,6 +30,16 @@ public class MainActivity extends FragmentActivity {
         mediaPlayer.setLooping(true);
         sharePreferencesUtil = new SharePreferencesUtil(this);
         FragmentUtil.showFragment(this, new SplashFragment(),  false, null, null, false);
+        setUpFirebaseAnalytic();
+    }
+
+    public void setUpFirebaseAnalytic(){
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "1");
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "user");
+        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "image");
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
     }
 
     @Override

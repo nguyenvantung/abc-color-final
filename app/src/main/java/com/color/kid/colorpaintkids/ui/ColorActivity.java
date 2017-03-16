@@ -37,6 +37,8 @@ import com.color.kid.colorpaintkids.util.Util;
 import com.color.kid.colorpaintkids.view.DialogShareImage;
 import com.color.kid.colorpaintkids.view.ItemOffsetDecoration;
 import com.color.kid.colorpaintkids.view.RenderColor;
+import com.startapp.android.publish.adsCommon.StartAppAd;
+import com.startapp.android.publish.adsCommon.StartAppSDK;
 
 import java.util.ArrayList;
 
@@ -105,6 +107,7 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
 
     private MediaPlayer mediaPlayer;
     private SharePreferencesUtil sharePreferencesUtil;
+    private StartAppAd startAppAd;
 
     @Override
     public void onSelectColor(int color) {
@@ -125,6 +128,7 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        StartAppSDK.init(this, Constants.START_APP_ID, true);
         setContentView(R.layout.activity_color);
 
         ButterKnife.bind(this);
@@ -165,6 +169,8 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
         OptionColorAdapter optionColorAdapter = new OptionColorAdapter();
         optionColorAdapter.setSelectItemColor(this);
         listToolColor.setAdapter(optionColorAdapter);
+        startAppAd = new StartAppAd(this);
+        startAppAd.show();
     }
 
     public void setupPaint(){
@@ -183,6 +189,11 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
     }
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
+    @Override
     public boolean onTouchEvent(MotionEvent event) {
         gestureDetectorCompat.onTouchEvent(event);
         return super.onTouchEvent(event);
@@ -190,7 +201,12 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
 
     private void setupBitmap(){
         mColoringBitmap = Bitmap.createBitmap(Constants.WIDTH_BITMAP, Constants.HEIGHT_BITMAP, Bitmap.Config.ARGB_8888);
-        mColoringBitmap.eraseColor(getColor(R.color.white));
+        if(android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            mColoringBitmap.eraseColor(getResources().getColor(R.color.white, getTheme()));
+        }else {
+            mColoringBitmap.eraseColor(getResources().getColor(R.color.white));
+        }
+
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inScaled = false;
         BitmapFactory.Options optionsBackground = new BitmapFactory.Options();
@@ -504,6 +520,7 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
         if (mediaPlayer != null && !mediaPlayer.isPlaying() && sharePreferencesUtil.getSoundPlayed()){
             mediaPlayer.start();
         }
+        startAppAd.onResume();
     }
 
     public void onPause() {
@@ -518,6 +535,7 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
             this.mRendererSaver.mDistanceY = this.renderColor.getDistanceY();
         }
         mediaPlayer.pause();
+        startAppAd.onPause();
     }
 
     @Override

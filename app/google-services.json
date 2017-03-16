@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1081318367398",
+    "firebase_url": "https://kidscolorpaint.firebaseio.com",
+    "project_id": "kidscolorpaint",
+    "storage_bucket": "kidscolorpaint.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1081318367398:android:1c8dd86653fa2073",
+        "android_client_info": {
+          "package_name": "com.color.kid.colorpaintkids"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1081318367398-56rm434ucri4r1p76qou8h52iak3rjan.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.color.kid.colorpaintkids.ui",
+            "certificate_hash": "ba86f8d2eea66ebd6b050670a37eb38c3b6d507e"
+          }
+        },
+        {
+          "client_id": "1081318367398-fu4qg9m2isbqtb10vd0rn056ognd0m1v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAk8dlq9f3tbmhX9xwbVvLrUdpgj7DxjMI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1081318367398-fu4qg9m2isbqtb10vd0rn056ognd0m1v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

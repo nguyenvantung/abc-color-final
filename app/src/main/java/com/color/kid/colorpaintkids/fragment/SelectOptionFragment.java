@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import com.color.kid.colorpaintkids.R;
 import com.color.kid.colorpaintkids.constance.Constants;
 import com.color.kid.colorpaintkids.ui.MainActivity;
+import com.color.kid.colorpaintkids.util.DebugLog;
 import com.color.kid.colorpaintkids.util.FragmentUtil;
 import com.color.kid.colorpaintkids.util.SharePreferencesUtil;
 import com.color.kid.colorpaintkids.util.Util;
@@ -51,7 +52,7 @@ public class SelectOptionFragment extends BaseFragment {
 
     public void showAdView(){
         mInterstitialAd = new InterstitialAd(getActivity());
-        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.setAdUnitId(Constants.ADMOB_ID);
 
         /*mNewGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +70,7 @@ public class SelectOptionFragment extends BaseFragment {
             public void onAdClosed() {
 
                 //Begin Game, continue with app
+                DebugLog.e("onAdClosed");
             }
         });
 
