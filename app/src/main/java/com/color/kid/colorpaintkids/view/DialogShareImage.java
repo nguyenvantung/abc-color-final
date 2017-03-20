@@ -21,13 +21,8 @@ import com.color.kid.colorpaintkids.util.Util;
  */
 
 public class DialogShareImage extends Dialog {
-    private int drawableData;
 
-    public void setDrawableData(int drawableData) {
-        this.drawableData = drawableData;
-    }
-
-    public DialogShareImage(Context context, final Bitmap bitmap) {
+    public DialogShareImage(Context context, final Bitmap bitmap, final ShareCallBack shareCallBack) {
         super(context);
         setContentView(R.layout.fragment_share);
         Typeface font1 = Typeface.createFromAsset(context.getAssets(), "fonts/cooper_black.ttf");
@@ -38,6 +33,7 @@ public class DialogShareImage extends Dialog {
             @Override
             public void onClick(View v) {
                 dismiss();
+                shareCallBack.onCallBackDialog(false);
             }
         });
 
@@ -46,18 +42,16 @@ public class DialogShareImage extends Dialog {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.putExtra(Intent.EXTRA_TEXT, "Hey view/download this image");
-                String path = Util.savebitmap(bitmap, getContext().getResources().getResourceEntryName(drawableData)).getPath();
-                Uri screenshotUri = Uri.parse(path);
-                intent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
-                intent.setType("image/*");
-                getContext().startActivity(Intent.createChooser(intent, "Share image via..."));
+                shareCallBack.onCallBackDialog(true);
             }
         });
 
         ImageView imgShare = (ImageView)findViewById(R.id.imgShare);
         imgShare.setImageBitmap(bitmap);
 
+    }
+
+    public interface ShareCallBack{
+        void onCallBackDialog(boolean select);
     }
 }

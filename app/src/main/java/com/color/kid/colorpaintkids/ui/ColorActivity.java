@@ -1,6 +1,7 @@
 package com.color.kid.colorpaintkids.ui;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,6 +12,7 @@ import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.opengl.GLSurfaceView;
 import android.os.Build;
 import android.os.Bundle;
@@ -128,7 +130,7 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        StartAppSDK.init(this, Constants.START_APP_ID, true);
+
         setContentView(R.layout.activity_color);
 
         ButterKnife.bind(this);
@@ -169,8 +171,13 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
         OptionColorAdapter optionColorAdapter = new OptionColorAdapter();
         optionColorAdapter.setSelectItemColor(this);
         listToolColor.setAdapter(optionColorAdapter);
+
+
+    }
+
+    public void loadStartApp(){
+        StartAppSDK.init(this, Constants.START_APP_ID, true);
         startAppAd = new StartAppAd(this);
-        startAppAd.show();
     }
 
     public void setupPaint(){
@@ -191,6 +198,11 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        if (startAppAd == null){
+            loadStartApp();
+        }else {
+            startAppAd.onBackPressed();
+        }
     }
 
     @Override
@@ -520,7 +532,11 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
         if (mediaPlayer != null && !mediaPlayer.isPlaying() && sharePreferencesUtil.getSoundPlayed()){
             mediaPlayer.start();
         }
-        startAppAd.onResume();
+        if (startAppAd == null){
+            loadStartApp();
+        }else {
+            startAppAd.onResume();
+        }
     }
 
     public void onPause() {
@@ -535,7 +551,11 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
             this.mRendererSaver.mDistanceY = this.renderColor.getDistanceY();
         }
         mediaPlayer.pause();
-        startAppAd.onPause();
+        if (startAppAd == null){
+            loadStartApp();
+        }else {
+            startAppAd.onPause();
+        }
     }
 
     @Override
@@ -635,9 +655,31 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
     }
 
     public void showDialogShare(){
-        DialogShareImage dialogShareImage = new DialogShareImage(this, mColoringBitmap);
-        dialogShareImage.setDrawableData(drawableData);
+        DialogShareImage dialogShareImage = new DialogShareImage(this, mColoringBitmap, new DialogShareImage.ShareCallBack() {
+            @Override
+            public void onCallBackDialog(boolean select) {
+                if (select){
+                    shareImage();
+                }else {
+                    if (startAppAd == null){
+                        loadStartApp();
+                    }else {
+                        startAppAd.show();
+                    }
+                }
+            }
+        });
         dialogShareImage.show();
+    }
+
+    public void shareImage(){
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_TEXT, "Hey view/download this image");
+        String path = Util.savebitmap(mColoringBitmap, getResources().getResourceEntryName(drawableData)).getPath();
+        Uri screenshotUri = Uri.parse(path);
+        intent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
+        intent.setType("image/*");
+        startActivity(Intent.createChooser(intent, "Share image via..."));
     }
 
     @Override

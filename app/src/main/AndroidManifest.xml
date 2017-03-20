@@ -42,13 +42,7 @@
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="65db9b3f07fe4aa24f91ff59b275cd17f6df2df8" />
-        <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="65db9b3f07fe4aa24f91ff59b275cd17f6df2df8" />
 
-        <activity
-            android:name="com.startapp.android.publish.ads.list3d.List3DActivity"
-            android:theme="@android:style/Theme" />
         <activity
             android:name="com.startapp.android.publish.adsCommon.activities.OverlayActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
