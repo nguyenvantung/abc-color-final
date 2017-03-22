@@ -5,19 +5,20 @@
     android:layout_height="match_parent"
     android:background="@drawable/loading_backround"
     android:orientation="vertical">
+
     <ImageView
         android:id="@+id/itemSound"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:src="@drawable/item_sound"
-        android:layout_marginLeft="20dp"/>
+        android:layout_marginLeft="20dp"
+        android:src="@drawable/item_sound" />
 
     <ScrollView
-        android:layout_below="@+id/itemSound"
         android:id="@+id/listOption"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/adView"
+        android:layout_below="@+id/itemSound"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -32,6 +33,7 @@
                 android:id="@+id/itemAnimal"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
+                android:layout_marginLeft="-5dp"
                 android:layout_marginRight="10dp"
                 android:src="@drawable/aminal" />
 
@@ -44,12 +46,12 @@
                 android:src="@drawable/car" />
 
             <ImageView
-                android:layout_marginTop="20dp"
                 android:id="@+id/itemSatan"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_below="@+id/itemAnimal"
                 android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp"
                 android:src="@drawable/satan" />
 
 
@@ -68,6 +70,7 @@
                 android:layout_height="150dp"
                 android:layout_below="@+id/itemCar"
                 android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp"
                 android:layout_toRightOf="@+id/itemSatan"
                 android:src="@drawable/fruit" />
 
@@ -75,11 +78,11 @@
                 android:id="@+id/itemMickey"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:layout_marginTop="31dp"
-                android:src="@drawable/mickey"
-                android:layout_below="@+id/itemSatan"
                 android:layout_alignLeft="@+id/itemSatan"
-                android:layout_alignStart="@+id/itemSatan" />
+                android:layout_alignStart="@+id/itemSatan"
+                android:layout_below="@+id/itemSatan"
+                android:layout_marginTop="31dp"
+                android:src="@drawable/mickey" />
 
 
         </RelativeLayout>
