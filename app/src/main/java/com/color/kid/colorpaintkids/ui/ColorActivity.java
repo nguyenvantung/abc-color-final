@@ -18,6 +18,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.internal.view.SupportMenu;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.widget.GridLayoutManager;
@@ -214,7 +215,7 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
     private void setupBitmap(){
         mColoringBitmap = Bitmap.createBitmap(Constants.WIDTH_BITMAP, Constants.HEIGHT_BITMAP, Bitmap.Config.ARGB_8888);
         if(android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-            mColoringBitmap.eraseColor(getResources().getColor(R.color.white, getTheme()));
+            mColoringBitmap.eraseColor(ContextCompat.getColor(this, R.color.white));
         }else {
             mColoringBitmap.eraseColor(getResources().getColor(R.color.white));
         }
@@ -633,7 +634,12 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
        if (paths.size() > 0) {
            undonePaths.add(paths.remove(paths.size() - 1));
            undonePaints.add(paints.remove(paints.size() - 1));
-           mPaint.setColor(getResources().getColor(R.color.colorAccent));
+           if(android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+               mPaint.setColor(ContextCompat.getColor(this,R.color.colorAccent));
+           }else {
+               mPaint.setColor(getResources().getColor(R.color.colorAccent));
+           }
+
            surfaceView.queueEvent(new DeleteTool());
        }
        checkPermission();
