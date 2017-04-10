@@ -5,6 +5,7 @@ import android.view.View;
 
 import com.color.kid.colorpaintkids.R;
 import com.color.kid.colorpaintkids.util.FragmentUtil;
+import com.madx.updatechecker.lib.UpdateRunnable;
 
 /**
  * Created by TungDaiCa on 2/6/2017.
@@ -33,6 +34,7 @@ public class SplashFragment extends BaseFragment {
     }
 
     public void nextScreen() {
-        FragmentUtil.showFragment(getActivity(), new SelectOptionFragment(), false, null, null, false);
+        new UpdateRunnable(getActivity(), new Handler()).force(true).start();
+        //FragmentUtil.showFragment(getActivity(), new SelectOptionFragment(), false, null, null, false);
     }
 }
