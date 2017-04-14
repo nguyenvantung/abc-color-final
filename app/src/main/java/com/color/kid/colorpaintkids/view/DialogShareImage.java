@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.opengl.GLSurfaceView;
 import android.provider.MediaStore;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,6 +25,7 @@ public class DialogShareImage extends Dialog {
 
     public DialogShareImage(Context context, final Bitmap bitmap, final ShareCallBack shareCallBack) {
         super(context);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.fragment_share);
         Typeface font1 = Typeface.createFromAsset(context.getAssets(), "fonts/cooper_black.ttf");
         TextView tvTitle = (TextView) findViewById(R.id.titleShare);
