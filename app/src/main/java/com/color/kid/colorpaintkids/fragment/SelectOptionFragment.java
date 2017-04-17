@@ -63,7 +63,6 @@ public class SelectOptionFragment extends BaseFragment {
         });*/
         AdRequest adRequest = new AdRequest.Builder()
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .addTestDevice("4389AC5BD12C65C6D3CDB750161A3D43")// Add your real device id here
                 .build();
         adView.loadAd(adRequest);
         //mInterstitialAd.loadAd(adRequest);
