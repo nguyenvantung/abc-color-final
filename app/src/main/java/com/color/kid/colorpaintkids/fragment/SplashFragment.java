@@ -34,7 +34,13 @@ public class SplashFragment extends BaseFragment {
     }
 
     public void nextScreen() {
-        new UpdateRunnable(getActivity(), new Handler()).start();
+        try {
+            if (getActivity() != null){
+                new UpdateRunnable(getActivity(), new Handler()).start();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         FragmentUtil.showFragment(getActivity(), new SelectOptionFragment(), false, null, null, false);
     }
 }

@@ -26,7 +26,6 @@ import butterknife.OnClick;
  */
 
 public class SelectOptionFragment extends BaseFragment {
-    private InterstitialAd mInterstitialAd;
     SharePreferencesUtil sharePreferencesUtil;
     @Bind(R.id.itemSound)
     ImageView imgSound;
@@ -51,32 +50,23 @@ public class SelectOptionFragment extends BaseFragment {
 
 
     public void showAdView(){
-        mInterstitialAd = new InterstitialAd(getActivity());
+       /* mInterstitialAd = new InterstitialAd(getActivity());
         mInterstitialAd.setAdUnitId(Constants.ADMOB_ID);
-
-        /*mNewGameButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mInterstitialAd.isLoaded()) {
-                    mInterstitialAd.show();
-                } else {
-                    //Begin Game, continue with app
-                }
-            }
-        });*/
-
         mInterstitialAd.setAdListener(new AdListener() {
             @Override
             public void onAdClosed() {
 
-                //Begin Game, continue with app
-                DebugLog.e("onAdClosed");
+                if (mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+                }
             }
-        });
-
-        AdRequest adRequest = new AdRequest.Builder().build();
+        });*/
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .addTestDevice("4389AC5BD12C65C6D3CDB750161A3D43")// Add your real device id here
+                .build();
         adView.loadAd(adRequest);
-        mInterstitialAd.loadAd(adRequest);
+        //mInterstitialAd.loadAd(adRequest);
     }
 
     @OnClick(R.id.itemAnimal)
