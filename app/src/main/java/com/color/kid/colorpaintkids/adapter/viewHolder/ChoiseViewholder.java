@@ -3,6 +3,7 @@ package com.color.kid.colorpaintkids.adapter.viewHolder;
 import android.content.Intent;
 import android.os.Build;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -33,7 +34,7 @@ public class ChoiseViewholder extends RecyclerView.ViewHolder implements View.On
     public void setData(int drawable) {
         drawableData = drawable;
         if(android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-            imageView.setImageDrawable(itemView.getContext().getResources().getDrawable(drawable, itemView.getContext().getTheme()));
+            imageView.setImageDrawable(ContextCompat.getDrawable(itemView.getContext(), drawable));
         }else {
             imageView.setImageDrawable(itemView.getContext().getResources().getDrawable(drawable));
         }

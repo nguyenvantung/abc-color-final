@@ -77,6 +77,9 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
     @Bind(R.id.toolDone)
     ImageView imgDone;
 
+    @Bind(R.id.img_select_color)
+    ImageView imgSelect;
+
     private RenderColor renderColor;
     private ColoringGLRendererSaver mRendererSaver;
     private Bitmap mColoringBitmap;
@@ -115,6 +118,11 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
     @Override
     public void onSelectColor(int color) {
        colorDraw = getResources().getColor(color);
+        if(android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            imgSelect.setColorFilter(ContextCompat.getColor(this, color));
+        }else {
+            imgSelect.setColorFilter(getResources().getColor(color));
+        }
     }
 
     public enum Tool {

@@ -23,10 +23,21 @@
         android:layout_alignParentBottom="true"
         android:background="@drawable/play_color_bar"
         android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/img_select_color"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerVertical="true"
+            android:tint="@color/aquamarine"
+            android:layout_margin="5dp"
+            android:src="@drawable/bg_item_select_color" />
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/listToolColor"
             android:layout_width="match_parent"
-            android:layout_height="80dp"/>
+            android:layout_height="80dp"
+            android:layout_toRightOf="@+id/img_select_color" />
     </RelativeLayout>
 
 </RelativeLayout>

@@ -1,5 +1,7 @@
 package com.color.kid.colorpaintkids.adapter.viewHolder;
 
+import android.graphics.Bitmap;
+import android.graphics.PorterDuff;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
@@ -7,10 +9,12 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.color.kid.colorpaintkids.R;
+import com.color.kid.colorpaintkids.util.Util;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by Tung on 3/9/2017.
@@ -36,9 +40,9 @@ public class ColorViewHolder extends RecyclerView.ViewHolder implements View.OnC
     public void setData(int color){
         this.color = color;
         if(android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-            imgColor.setBackgroundColor(ContextCompat.getColor(itemView.getContext(), color));
+            imgColor.setColorFilter(ContextCompat.getColor(itemView.getContext(), color),PorterDuff.Mode.MULTIPLY);
         }else {
-            imgColor.setBackgroundColor(itemView.getContext().getResources().getColor(color));
+            imgColor.setColorFilter(itemView.getContext().getResources().getColor(color), PorterDuff.Mode.MULTIPLY);
         }
 
     }

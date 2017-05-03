@@ -6,7 +6,9 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Environment;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 
@@ -31,13 +33,13 @@ public class Util {
         return bmOverlay;
     }
 
-    public static Bitmap getBitmapFromView(View view) {
-        view.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
-        Bitmap bitmap = Bitmap.createBitmap(view.getMeasuredWidth(), view.getMeasuredHeight(),
-                Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-        view.layout(0, 0, view.getMeasuredWidth(), view.getMeasuredHeight());
-        view.draw(canvas);
+    public static Bitmap getBitmapFromView(int width, int height, int color, Context context) {
+        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        if(android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            bitmap.eraseColor(ContextCompat.getColor(context, color));
+        }else {
+            bitmap.eraseColor(color);
+        }
         return bitmap;
     }
 

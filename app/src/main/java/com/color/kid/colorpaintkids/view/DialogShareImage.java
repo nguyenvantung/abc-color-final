@@ -45,6 +45,7 @@ public class DialogShareImage extends Dialog {
             @Override
             public void onClick(View v) {
                 shareCallBack.onCallBackDialog(true);
+                dismiss();
             }
         });
 
