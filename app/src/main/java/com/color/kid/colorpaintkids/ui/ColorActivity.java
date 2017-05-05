@@ -7,10 +7,13 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.LightingColorFilter;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.opengl.GLSurfaceView;
@@ -118,11 +121,16 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
     @Override
     public void onSelectColor(int color) {
        colorDraw = getResources().getColor(color);
+        setColorOption(color);
+    }
+
+    public void setColorOption(int color){
         if(android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-            imgSelect.setColorFilter(ContextCompat.getColor(this, color));
+            imgSelect.setColorFilter(this.getResources().getColor(color), PorterDuff.Mode.MULTIPLY);
         }else {
-            imgSelect.setColorFilter(getResources().getColor(color));
+            imgSelect.setColorFilter(getResources().getColor(color), PorterDuff.Mode.MULTIPLY);
         }
+
     }
 
     public enum Tool {
@@ -180,7 +188,7 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
         OptionColorAdapter optionColorAdapter = new OptionColorAdapter();
         optionColorAdapter.setSelectItemColor(this);
         listToolColor.setAdapter(optionColorAdapter);
-
+        imgSelect.setColorFilter(getBaseContext().getResources().getColor(R.color.aquamarine));
 
     }
 
