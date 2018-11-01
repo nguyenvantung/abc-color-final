@@ -1,24 +1,16 @@
 package com.color.kid.colorpaintkids.fragment;
 
-import android.media.MediaPlayer;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.color.kid.colorpaintkids.R;
 import com.color.kid.colorpaintkids.constance.Constants;
 import com.color.kid.colorpaintkids.ui.MainActivity;
-import com.color.kid.colorpaintkids.util.DebugLog;
 import com.color.kid.colorpaintkids.util.FragmentUtil;
 import com.color.kid.colorpaintkids.util.SharePreferencesUtil;
 import com.color.kid.colorpaintkids.util.Util;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
 
-import java.io.IOException;
-
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
@@ -27,11 +19,9 @@ import butterknife.OnClick;
 
 public class SelectOptionFragment extends BaseFragment {
     SharePreferencesUtil sharePreferencesUtil;
-    @Bind(R.id.itemSound)
+    @BindView(R.id.itemSound)
     ImageView imgSound;
 
-    @Bind(R.id.adView)
-    AdView adView;
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_select_option;
@@ -61,10 +51,9 @@ public class SelectOptionFragment extends BaseFragment {
                 }
             }
         });*/
-        AdRequest adRequest = new AdRequest.Builder()
+       /* AdRequest adRequest = new AdRequest.Builder()
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .build();
-        adView.loadAd(adRequest);
+                .build();*/
         //mInterstitialAd.loadAd(adRequest);
     }
 

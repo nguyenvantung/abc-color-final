@@ -7,13 +7,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.graphics.LightingColorFilter;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
-import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.opengl.GLSurfaceView;
@@ -48,7 +45,7 @@ import com.startapp.android.publish.adsCommon.StartAppSDK;
 
 import java.util.ArrayList;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -59,28 +56,28 @@ import butterknife.OnClick;
 public class ColorActivity extends FragmentActivity implements GestureDetector.OnGestureListener, ColorViewHolder.SelectItemColor {
 
     private static final int PERMISSON_READ_EXTERNAL_STORAGE = 69;
-    @Bind(R.id.surfaceView)
+    @BindView(R.id.surfaceView)
     GLSurfaceView surfaceView;
 
-    @Bind(R.id.listToolColor)
+    @BindView(R.id.listToolColor)
     RecyclerView listToolColor;
 
-    @Bind(R.id.toolBucket)
+    @BindView(R.id.toolBucket)
     ImageView imgBucket;
 
-    @Bind(R.id.toolBush)
+    @BindView(R.id.toolBush)
     ImageView imgBush;
 
-    @Bind(R.id.toolEraser)
+    @BindView(R.id.toolEraser)
     ImageView imgEraser;
 
-    @Bind(R.id.toolDelete)
+    @BindView(R.id.toolDelete)
     ImageView imgDelete;
 
-    @Bind(R.id.toolDone)
+    @BindView(R.id.toolDone)
     ImageView imgDone;
 
-    @Bind(R.id.img_select_color)
+    @BindView(R.id.img_select_color)
     ImageView imgSelect;
 
     private RenderColor renderColor;

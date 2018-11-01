@@ -1,6 +1,5 @@
 package com.color.kid.colorpaintkids.adapter.viewHolder;
 
-import android.graphics.Bitmap;
 import android.graphics.PorterDuff;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
@@ -9,12 +8,9 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.color.kid.colorpaintkids.R;
-import com.color.kid.colorpaintkids.util.Util;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
-import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by Tung on 3/9/2017.
@@ -22,7 +18,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ColorViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-    @Bind(R.id.itemColor)
+    @BindView(R.id.itemColor)
     ImageView imgColor;
     private SelectItemColor selectItemColor;
     private int color;

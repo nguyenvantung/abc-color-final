@@ -14,14 +14,14 @@ import com.color.kid.colorpaintkids.constance.Constants;
 import com.color.kid.colorpaintkids.ui.ColorActivity;
 import com.color.kid.colorpaintkids.util.Util;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
  * Created by Tung Nguyen on 12/22/2016.
  */
 public class ChoiseViewholder extends RecyclerView.ViewHolder implements View.OnClickListener{
-    @Bind(R.id.imgItem)
+    @BindView(R.id.imgItem)
     ImageView imageView;
     private int drawableData;
 

@@ -11,14 +11,9 @@ import com.color.kid.colorpaintkids.R;
 import com.color.kid.colorpaintkids.adapter.ChoiseFragmentAdapter;
 import com.color.kid.colorpaintkids.constance.ConstantSource;
 import com.color.kid.colorpaintkids.constance.Constants;
-import com.color.kid.colorpaintkids.ui.MainActivity;
 import com.color.kid.colorpaintkids.view.ItemOffsetDecoration;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import butterknife.Bind;
-import butterknife.OnClick;
+import butterknife.BindView;
 
 /**
  * Created by Tung on 2/3/2017.
@@ -26,10 +21,10 @@ import butterknife.OnClick;
 
 public class SelectItemFragment extends BaseFragment {
 
-    @Bind(R.id.titleOption)
+    @BindView(R.id.titleOption)
     TextView tvTitle;
 
-    @Bind(R.id.listItem)
+    @BindView(R.id.listItem)
     RecyclerView recyclerView;
 
     private int option;
