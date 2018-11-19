@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
 import com.color.kid.colorpaintkids.R;
-import com.color.kid.colorpaintkids.fragment.SplashFragment;
+import com.color.kid.colorpaintkids.fragment.SelectOptionFragment;
 import com.color.kid.colorpaintkids.util.FragmentUtil;
 import com.color.kid.colorpaintkids.util.SharePreferencesUtil;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -29,7 +29,7 @@ public class MainActivity extends FragmentActivity {
         }
         mediaPlayer.setLooping(true);
         sharePreferencesUtil = new SharePreferencesUtil(this);
-        FragmentUtil.showFragment(this, new SplashFragment(),  false, null, null, false);
+        FragmentUtil.showFragment(this, new SelectOptionFragment(), false, null, null, false);
         setUpFirebaseAnalytic();
     }
 

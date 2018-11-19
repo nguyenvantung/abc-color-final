@@ -215,7 +215,7 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
         if (startAppAd == null){
             loadStartApp();
         }else {
-            startAppAd.onBackPressed();
+            startAppAd.onResume();
         }
     }
 
@@ -257,7 +257,7 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
 
         } else if (mSelectedTool == Tool.ERASER) {
             mPaint.setColor(Color.WHITE);
-            mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+            //mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
             handleDrawDown((event.getX() * 896.0f) / ((float) surfaceView.getWidth()), (event.getY() * 896.0f) / ((float) surfaceView.getHeight()));
         }
         return false;
@@ -546,11 +546,6 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
         if (mediaPlayer != null && !mediaPlayer.isPlaying() && sharePreferencesUtil.getSoundPlayed()){
             mediaPlayer.start();
         }
-        if (startAppAd == null){
-            loadStartApp();
-        }else {
-            startAppAd.onResume();
-        }
     }
 
     public void onPause() {
@@ -714,7 +709,6 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
                     DebugLog.e("Permission" + "Granted");
                     showDialogShare();
                 }
-
                 break;
         }
     }

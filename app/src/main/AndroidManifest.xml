@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.SplashActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -29,6 +29,9 @@
 
         <activity
             android:name=".ui.ColorActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.MainActivity"
             android:screenOrientation="portrait"></activity>
         <!--&lt;!&ndash;Include the AdActivity configChanges and theme. &ndash;&gt;
         <activity android:name="com.google.android.gms.ads.AdActivity"
