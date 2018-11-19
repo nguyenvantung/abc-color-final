@@ -1,6 +1,8 @@
 package com.color.kid.colorpaintkids.ui;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -23,11 +25,14 @@ import android.support.v4.internal.view.SupportMenu;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.color.kid.colorpaintkids.R;
 import com.color.kid.colorpaintkids.adapter.OptionColorAdapter;
@@ -40,6 +45,11 @@ import com.color.kid.colorpaintkids.util.Util;
 import com.color.kid.colorpaintkids.view.DialogShareImage;
 import com.color.kid.colorpaintkids.view.ItemOffsetDecoration;
 import com.color.kid.colorpaintkids.view.RenderColor;
+import com.facebook.ads.Ad;
+import com.facebook.ads.AdError;
+import com.facebook.ads.AdSize;
+import com.facebook.ads.InstreamVideoAdListener;
+import com.facebook.ads.InstreamVideoAdView;
 import com.startapp.android.publish.adsCommon.StartAppAd;
 import com.startapp.android.publish.adsCommon.StartAppSDK;
 
@@ -48,6 +58,8 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.color.kid.colorpaintkids.ColorPaintKidsApplication.getContext;
 
 /**
  * Created by Tung on 1/18/2017.
@@ -80,6 +92,9 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
     @BindView(R.id.img_select_color)
     ImageView imgSelect;
 
+    @BindView(R.id.ads_container)
+    LinearLayout layoutAds;
+
     private RenderColor renderColor;
     private ColoringGLRendererSaver mRendererSaver;
     private Bitmap mColoringBitmap;
@@ -102,11 +117,11 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
     private boolean isBucket = false;
 
     // handle undo
-    private ArrayList<Path> paths = new ArrayList<Path>();
-    private ArrayList<Paint> paints = new ArrayList<Paint>();
+    private ArrayList<Path> paths = new ArrayList<>();
+    private ArrayList<Paint> paints = new ArrayList<>();
 
-    private ArrayList<Path> undonePaths = new ArrayList<Path>();
-    private ArrayList<Paint> undonePaints = new ArrayList<Paint>();
+    private ArrayList<Path> undonePaths = new ArrayList<>();
+    private ArrayList<Paint> undonePaints = new ArrayList<>();
 
     private int drawableData = 0;
     private int colorDraw;
@@ -114,6 +129,8 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
     private MediaPlayer mediaPlayer;
     private SharePreferencesUtil sharePreferencesUtil;
     private StartAppAd startAppAd;
+    // facebook ads
+    private InstreamVideoAdView adView;
 
     @Override
     public void onSelectColor(int color) {
@@ -150,7 +167,6 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
         ButterKnife.bind(this);
 
         intitData();
-
     }
 
     public void intitData() {
@@ -178,7 +194,6 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
         this.mIsScaling = false;
         mSelectedTool = Tool.BRUSH;
         imgBush.setSelected(true);
-
         listToolColor.setLayoutManager(new GridLayoutManager(this, 2, GridLayoutManager.HORIZONTAL, false));
         ItemOffsetDecoration itemDecoration = new ItemOffsetDecoration(this, R.dimen.item_color);
         listToolColor.addItemDecoration(itemDecoration);
@@ -211,12 +226,7 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        if (startAppAd == null){
-            loadStartApp();
-        }else {
-            startAppAd.onResume();
-        }
+        handleBackapp();
     }
 
     @Override
@@ -712,6 +722,78 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
                 break;
         }
     }
+
+    private void handleBackapp(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.save_image_back);
+        builder.setNegativeButton(R.string.no, (dialog, which) -> {
+            super.onBackPressed();
+            dialog.dismiss();
+        });
+        builder.setPositiveButton(R.string.yes, (dialog, which) -> {
+            dialog.dismiss();
+            Util.savebitmap(mColoringBitmap, getResources().getResourceEntryName(drawableData)).getPath();
+            super.onBackPressed();
+        });
+
+        builder.create().show();
+    }
+
+    private void loadInstreamAd() {
+        adView = new InstreamVideoAdView(this, "ID", new AdSize(
+                pxToDp(layoutAds.getMeasuredWidth()),
+                pxToDp(layoutAds.getMeasuredHeight())));
+        adView.setAdListener(new InstreamVideoAdListener() {
+            @Override
+            public void onAdVideoComplete(Ad ad) {
+
+            }
+
+            @Override
+            public void onError(Ad ad, AdError adError) {
+
+            }
+
+            @Override
+            public void onAdLoaded(Ad ad) {
+
+            }
+
+            @Override
+            public void onAdClicked(Ad ad) {
+
+            }
+
+            @Override
+            public void onLoggingImpression(Ad ad) {
+
+            }
+        });
+        adView.loadAd();
+    }
+
+    public int pxToDp(int px) {
+        DisplayMetrics displayMetrics = getContext().getResources().getDisplayMetrics();
+        return Math.round(px / (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+    }
+
+    private void showInstreamVideoAdWithDelay() {
+        layoutAds.setVisibility(View.VISIBLE);
+        // Check if adView has been loaded successfully
+        if (adView == null || !adView.isAdLoaded() ) {
+            return;
+        }
+        // Check if ad is already expired or invalidated, and do not show ad if that is the case.
+        if (adView.isAdInvalidated()) {
+            return;
+        }
+        // Inflate Ad into container and show it
+        layoutAds.removeAllViews();
+        layoutAds.addView(adView);
+        adView.show();
+    }
+
+
 
 
 }

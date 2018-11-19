@@ -40,4 +40,13 @@
             android:layout_toRightOf="@+id/img_select_color" />
     </RelativeLayout>
 
+    <LinearLayout
+        android:id="@+id/ads_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:background="@color/blue"
+        android:visibility="gone"/>
+
 </RelativeLayout>

@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">KidsLearningDraw</string>
     <string name="action_settings">Settings</string>
+    <string name="save_image_back">Do you want save image!</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>
