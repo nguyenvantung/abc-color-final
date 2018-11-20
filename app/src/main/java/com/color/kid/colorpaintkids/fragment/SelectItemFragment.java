@@ -9,9 +9,10 @@ import android.widget.TextView;
 
 import com.color.kid.colorpaintkids.R;
 import com.color.kid.colorpaintkids.adapter.ChoiseFragmentAdapter;
-import com.color.kid.colorpaintkids.constance.ConstantSource;
 import com.color.kid.colorpaintkids.constance.Constants;
 import com.color.kid.colorpaintkids.view.ItemOffsetDecoration;
+
+import java.io.IOException;
 
 import butterknife.BindView;
 
@@ -28,7 +29,7 @@ public class SelectItemFragment extends BaseFragment {
     RecyclerView recyclerView;
 
     private int option;
-    private int[] listDataItem ;
+    private String item = "";
 
     public static SelectItemFragment newInstance(int option){
         Bundle bundle = new Bundle();
@@ -57,36 +58,42 @@ public class SelectItemFragment extends BaseFragment {
     @Override
     protected void initData() {
         option = this.getArguments().getInt(Constants.KEY_OPTION);
-        ChoiseFragmentAdapter adapter = new ChoiseFragmentAdapter(getDataList(option));
+        ChoiseFragmentAdapter adapter = new ChoiseFragmentAdapter(getDataList(option), getActivity(), item);
         recyclerView.setAdapter(adapter);
     }
 
 
-    private int[] getDataList(int position){
-        int[] integerList = null;
+    private String[] getDataList(int position){
+        String[] integerList = null;
         switch (position){
             case Constants.AMINAL:
-                integerList = ConstantSource.listAminalDraw;
+                item = "animal";
+                integerList = getFileItem("animal");
                 tvTitle.setText("Aminal");
                 break;
             case Constants.CARS:
-                integerList = ConstantSource.listCarDraw;
+                item = "car";
+                integerList = getFileItem("car");
                 tvTitle.setText("Cars");
                 break;
             case Constants.FOOD:
-                integerList = ConstantSource.listFoodDraw;
+                item = "food";
+                integerList = getFileItem("food");
                 tvTitle.setText("Food");
                 break;
             case Constants.MICKEY:
-                integerList = ConstantSource.listMickeyDraw;
+                item = "mickey";
+                integerList = getFileItem("mickey");
                 tvTitle.setText("Mickey");
                 break;
             case Constants.MERMAIDS:
-                integerList = ConstantSource.listpeopleDraw;
+                item = "princesses";
+                integerList = getFileItem("princesses");
                 tvTitle.setText("People");
                 break;
             case Constants.SANTA:
-                integerList = ConstantSource.listSantaDraw;
+                item = "santa";
+                integerList = getFileItem("santa");
                 tvTitle.setText("Santa");
                 break;
             default:
@@ -96,6 +103,17 @@ public class SelectItemFragment extends BaseFragment {
 
         }
         return integerList;
+    }
+
+    public String[] getFileItem(String path){
+        String [] list = null;
+        try {
+            list = getActivity().getAssets().list(path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return list;
+
     }
 
 

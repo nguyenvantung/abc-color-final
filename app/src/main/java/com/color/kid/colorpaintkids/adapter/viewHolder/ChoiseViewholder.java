@@ -1,6 +1,7 @@
 package com.color.kid.colorpaintkids.adapter.viewHolder;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
@@ -23,7 +24,7 @@ import butterknife.ButterKnife;
 public class ChoiseViewholder extends RecyclerView.ViewHolder implements View.OnClickListener{
     @BindView(R.id.imgItem)
     ImageView imageView;
-    private int drawableData;
+    private String fileImage;
 
     public ChoiseViewholder(View itemView) {
         super(itemView);
@@ -31,20 +32,16 @@ public class ChoiseViewholder extends RecyclerView.ViewHolder implements View.On
         itemView.setOnClickListener(this);
     }
 
-    public void setData(int drawable) {
-        drawableData = drawable;
-        if(android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-            imageView.setImageDrawable(ContextCompat.getDrawable(itemView.getContext(), drawable));
-        }else {
-            imageView.setImageDrawable(itemView.getContext().getResources().getDrawable(drawable));
-        }
+    public void setData(Drawable drawable, String file) {
+        fileImage = file;
+        imageView.setImageDrawable(drawable);
 
     }
 
     @Override
     public void onClick(View view) {
-        Intent intent = new Intent((FragmentActivity)itemView.getContext(), ColorActivity.class);
-        intent.putExtra(Constants.KEY_DRAWABLE, drawableData);
+        Intent intent = new Intent(itemView.getContext(), ColorActivity.class);
+        intent.putExtra(Constants.KEY_DRAWABLE, fileImage);
         itemView.getContext().startActivity(intent);
         Util.playSong(itemView.getContext(), R.raw.sf_0);
     }

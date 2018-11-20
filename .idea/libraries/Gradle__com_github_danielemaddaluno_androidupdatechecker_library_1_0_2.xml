@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.danielemaddaluno.androidupdatechecker:library-1.0.2">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/library-1.0.2.aar/ad54de1c8ea556d9f41b66f9754c8161/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/library-1.0.2.aar/ad54de1c8ea556d9f41b66f9754c8161/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.danielemaddaluno.androidupdatechecker/library/1.0.2/69750d2bf2adad58fea4077e7924322272007db8/library-1.0.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

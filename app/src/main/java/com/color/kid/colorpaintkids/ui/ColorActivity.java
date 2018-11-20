@@ -13,6 +13,8 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.opengl.GLSurfaceView;
@@ -53,6 +55,8 @@ import com.facebook.ads.InstreamVideoAdView;
 import com.startapp.android.publish.adsCommon.StartAppAd;
 import com.startapp.android.publish.adsCommon.StartAppSDK;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -123,7 +127,8 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
     private ArrayList<Path> undonePaths = new ArrayList<>();
     private ArrayList<Paint> undonePaints = new ArrayList<>();
 
-    private int drawableData = 0;
+    private String filePath;
+    private Drawable drawableData;
     private int colorDraw;
 
     private MediaPlayer mediaPlayer;
@@ -171,7 +176,8 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
 
     public void intitData() {
         sharePreferencesUtil = new SharePreferencesUtil(this);
-        drawableData = getIntent().getExtras().getInt(Constants.KEY_DRAWABLE);
+        filePath = getIntent().getExtras().getString(Constants.KEY_DRAWABLE);
+        createDrawableImage();
         surfaceView.setEGLContextClientVersion(2);
 
         mediaPlayer = MediaPlayer.create(this, R.raw.bgr_happy_sunshine);
@@ -202,6 +208,16 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
         listToolColor.setAdapter(optionColorAdapter);
         imgSelect.setColorFilter(getBaseContext().getResources().getColor(R.color.aquamarine));
 
+    }
+
+    public void createDrawableImage(){
+        InputStream inputStream = null;
+        try {
+            inputStream = getAssets().open(filePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        drawableData = Drawable.createFromStream(inputStream, null);
     }
 
     public void loadStartApp(){
@@ -243,12 +259,9 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
             mColoringBitmap.eraseColor(getResources().getColor(R.color.white));
         }
 
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inScaled = false;
         BitmapFactory.Options optionsBackground = new BitmapFactory.Options();
-        options.inScaled = false;
         this.mBackgroundBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.bg, optionsBackground);
-        this.mOverlayBitmap = BitmapFactory.decodeResource(getResources(), drawableData, options);
+        this.mOverlayBitmap = ((BitmapDrawable)drawableData).getBitmap();
         mColoringBitmap = Util.overlay(mColoringBitmap, mOverlayBitmap);
 
         renderColor.setColoringBitmap(this.mColoringBitmap);
@@ -703,7 +716,7 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
     public void shareImage(){
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.putExtra(Intent.EXTRA_TEXT, "Hey view/download this image");
-        String path = Util.savebitmap(mColoringBitmap, getResources().getResourceEntryName(drawableData)).getPath();
+        String path = Util.savebitmap(mColoringBitmap, filePath).getPath();
         Uri screenshotUri = Uri.parse(path);
         intent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
         intent.setType("image/*");
@@ -732,7 +745,7 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
         });
         builder.setPositiveButton(R.string.yes, (dialog, which) -> {
             dialog.dismiss();
-            Util.savebitmap(mColoringBitmap, getResources().getResourceEntryName(drawableData)).getPath();
+            Util.savebitmap(mColoringBitmap, filePath).getPath();
             super.onBackPressed();
         });
 
