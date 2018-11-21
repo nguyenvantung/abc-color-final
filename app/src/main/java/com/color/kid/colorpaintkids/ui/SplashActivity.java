@@ -26,14 +26,10 @@ public class SplashActivity extends FragmentActivity {
 
     public void nextScreen() {
         Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                // TODO check update
-                startActivity(new Intent(SplashActivity.this, MainActivity.class));
-                finish();
-            }
-        }, 3000);
+        handler.postDelayed(() -> {
+            // TODO check update
+            startActivity(new Intent(SplashActivity.this, MainActivity.class));
+            finish();},3000);
     }
 
     private boolean web_update(){
