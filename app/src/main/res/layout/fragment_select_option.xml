@@ -17,7 +17,6 @@
         android:id="@+id/listOption"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/adView"
         android:layout_below="@+id/itemSound"
         android:orientation="vertical">
 
@@ -29,30 +28,53 @@
             android:orientation="vertical">
 
 
-            <ImageView
-                android:id="@+id/itemAnimal"
+            <LinearLayout
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:layout_marginLeft="-5dp"
-                android:layout_marginRight="10dp"
-                android:src="@drawable/aminal" />
+                android:background="@drawable/bg_item_menu"
+                android:id="@+id/view_itemAnimal"
+                android:gravity="center">
+                <ImageView
+                    android:id="@+id/itemAnimal"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_marginLeft="-5dp"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/aminal" />
+            </LinearLayout>
 
-            <ImageView
-                android:id="@+id/itemCar"
-                android:layout_width="135dp"
-                android:layout_height="150dp"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@+id/itemAnimal"
-                android:src="@drawable/car" />
-
-            <ImageView
-                android:id="@+id/itemSatan"
+            <LinearLayout
+                android:layout_toRightOf="@+id/view_itemAnimal"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:layout_below="@+id/itemAnimal"
+                android:background="@drawable/bg_item_menu"
+                android:id="@+id/view_itemCar"
+                android:gravity="center">
+                <ImageView
+                    android:id="@+id/itemCar"
+                    android:layout_width="110dp"
+                    android:layout_height="120dp"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/car" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:background="@drawable/bg_item_menu"
+                android:id="@+id/view_itemSatan"
+                android:layout_below="@+id/view_itemAnimal"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="20dp"
-                android:src="@drawable/satan" />
+                android:gravity="center">
+                <ImageView
+                    android:id="@+id/itemSatan"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:src="@drawable/satan" />
+            </LinearLayout>
+
 
 
             <ImageView
@@ -68,19 +90,19 @@
                 android:id="@+id/itemFruit"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:layout_below="@+id/itemCar"
+                android:layout_below="@+id/view_itemCar"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="20dp"
-                android:layout_toRightOf="@+id/itemSatan"
+                android:layout_toRightOf="@+id/view_itemAnimal"
                 android:src="@drawable/fruit" />
 
             <ImageView
                 android:id="@+id/itemMickey"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:layout_alignLeft="@+id/itemSatan"
-                android:layout_alignStart="@+id/itemSatan"
-                android:layout_below="@+id/itemSatan"
+                android:layout_alignLeft="@+id/view_itemSatan"
+                android:layout_alignStart="@+id/view_itemSatan"
+                android:layout_below="@+id/view_itemSatan"
                 android:layout_marginTop="31dp"
                 android:src="@drawable/mickey" />
 
