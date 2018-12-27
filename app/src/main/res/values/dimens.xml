@@ -5,4 +5,11 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="item_image">5dp</dimen>
     <dimen name="item_color">2dp</dimen>
+
+    <string name="size_10">10dp</string>
+    <string name="size_20">20dp</string>
+    <string name="size_40">40dp</string>
+    <string name="size_110">110dp</string>
+    <string name="size_120">120dp</string>
+    <string name="size_150">150dp</string>
 </resources>
