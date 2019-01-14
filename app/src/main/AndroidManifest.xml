@@ -15,9 +15,10 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
+        android:hardwareAccelerated="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
-            android:name=".ui.SplashActivity"
+            android:name="com.color.kid.coloring.ui.SplashActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -28,10 +29,10 @@
         </activity>
 
         <activity
-            android:name=".ui.ColorActivity"
+            android:name="com.color.kid.coloring.ui.ColorActivity"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".ui.MainActivity"
+            android:name="com.color.kid.coloring.ui.MainActivity"
             android:screenOrientation="portrait"></activity>
         <!--&lt;!&ndash;Include the AdActivity configChanges and theme. &ndash;&gt;
         <activity android:name="com.google.android.gms.ads.AdActivity"

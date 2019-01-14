@@ -37,7 +37,8 @@
             android:id="@+id/listToolColor"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:layout_toRightOf="@+id/img_select_color" />
+            android:layout_toRightOf="@+id/img_select_color"
+            android:padding="@dimen/size_2"/>
     </RelativeLayout>
 
     <LinearLayout

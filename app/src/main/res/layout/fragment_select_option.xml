@@ -15,8 +15,9 @@
     <ScrollView
         android:id="@+id/listOption"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/itemSound"
+        android:layout_above="@+id/adView"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -107,8 +108,8 @@
                 android:gravity="center">
                 <ImageView
                     android:id="@+id/itemFruit"
-                    android:layout_width="@dimen/size_150"
-                    android:layout_height="@dimen/size_150"
+                    android:layout_width="@dimen/size_120"
+                    android:layout_height="@dimen/size_120"
                     android:layout_below="@+id/view_itemCar"
                     android:src="@drawable/fruit" />
             </LinearLayout>
@@ -135,5 +136,16 @@
         </RelativeLayout>
 
     </ScrollView>
+
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
+    </com.google.android.gms.ads.AdView>
 
 </RelativeLayout>
