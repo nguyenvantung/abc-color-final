@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import com.color.kid.colorpaintkids.R;
+import com.color.kid.coloring.R;
 import com.color.kid.coloring.adapter.viewHolder.ChoiseViewholder;
 
 import java.io.IOException;

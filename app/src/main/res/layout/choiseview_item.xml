@@ -5,9 +5,10 @@
     android:orientation="horizontal">
     <ImageView
         android:id="@+id/imgItem"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:padding="4dp"
+        android:layout_width="@dimen/size_150"
+        android:layout_height="@dimen/size_150"
+        android:padding="@dimen/size_5"
+        android:layout_gravity="center"
         android:src="@drawable/picture_1"
         android:background="@drawable/share_image_bgr"/>
 

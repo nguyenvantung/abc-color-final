@@ -8,7 +8,7 @@ import android.widget.ImageView;
 
 
 import com.color.kid.coloring.constance.Constants;
-import com.color.kid.colorpaintkids.R;
+import com.color.kid.coloring.R;
 import com.color.kid.coloring.ui.ColorActivity;
 import com.color.kid.coloring.util.Util;
 

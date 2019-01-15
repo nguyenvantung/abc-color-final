@@ -6,7 +6,7 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 
-import com.color.kid.colorpaintkids.R;
+import com.color.kid.coloring.R;
 
 public class SplashActivity extends FragmentActivity {
     @Override

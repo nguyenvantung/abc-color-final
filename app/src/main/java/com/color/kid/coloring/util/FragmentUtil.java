@@ -14,7 +14,7 @@ import android.transition.Fade;
 import android.transition.TransitionSet;
 import android.view.View;
 
-import com.color.kid.colorpaintkids.R;
+import com.color.kid.coloring.R;
 
 
 public class FragmentUtil {

@@ -44,7 +44,7 @@ import com.color.kid.coloring.util.Util;
 import com.color.kid.coloring.view.DialogShareImage;
 import com.color.kid.coloring.view.ItemOffsetDecoration;
 import com.color.kid.coloring.view.RenderColor;
-import com.color.kid.colorpaintkids.R;
+import com.color.kid.coloring.R;
 import com.color.kid.coloring.util.QueueLinearFloodFiller;
 import com.facebook.ads.Ad;
 import com.facebook.ads.AdError;
@@ -784,7 +784,7 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
     private void handleShowAds(){
         int show = (new Random()).nextInt((10 - 1) + 1) + 1;
         if (show == 1 || show == 3 || show == 6 || show == 8){
-            interstitialAd.show();
+            //interstitialAd.show();
         }
 
     }

@@ -172,6 +172,6 @@ public class SharePreferencesUtil {
     }
 
     public boolean getSoundPlayed() {
-        return this.mSharedPreferences.getBoolean(PREFERENCES_SOUND_PLAYED, false);
+        return this.mSharedPreferences.getBoolean(PREFERENCES_SOUND_PLAYED, true);
     }
 }

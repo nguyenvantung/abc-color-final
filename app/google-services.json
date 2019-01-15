@@ -1,35 +1,35 @@
 {
   "project_info": {
-    "project_number": "1081318367398",
-    "firebase_url": "https://kidscolorpaint.firebaseio.com",
-    "project_id": "kidscolorpaint",
-    "storage_bucket": "kidscolorpaint.appspot.com"
+    "project_number": "268374863955",
+    "firebase_url": "https://kids-coloring-76edb.firebaseio.com",
+    "project_id": "kids-coloring-76edb",
+    "storage_bucket": "kids-coloring-76edb.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1081318367398:android:1c8dd86653fa2073",
+        "mobilesdk_app_id": "1:268374863955:android:ae134c858bdc9929",
         "android_client_info": {
-          "package_name": "com.color.kid.colorpaintkids"
+          "package_name": "com.color.kid.coloring"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1081318367398-56rm434ucri4r1p76qou8h52iak3rjan.apps.googleusercontent.com",
+          "client_id": "268374863955-avq95ppudn2avijlerqg7g9pjhphep7p.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.color.kid.colorpaintkids.ui",
-            "certificate_hash": "ba86f8d2eea66ebd6b050670a37eb38c3b6d507e"
+            "package_name": "com.color.kid.coloring",
+            "certificate_hash": "4573d86684dfdab6b7a65b7dbb75463a84496983"
           }
         },
         {
-          "client_id": "1081318367398-fu4qg9m2isbqtb10vd0rn056ognd0m1v.apps.googleusercontent.com",
+          "client_id": "268374863955-47v1ci91aqgs5pbut17qoioa3vmeua39.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAk8dlq9f3tbmhX9xwbVvLrUdpgj7DxjMI"
+          "current_key": "AIzaSyDSXZuU_DQbvf4Ax--Zo06GKFc7JJBGiz4"
         }
       ],
       "services": {
@@ -40,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "1081318367398-fu4qg9m2isbqtb10vd0rn056ognd0m1v.apps.googleusercontent.com",
+              "client_id": "268374863955-47v1ci91aqgs5pbut17qoioa3vmeua39.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

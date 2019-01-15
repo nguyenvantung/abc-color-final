@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.color.kid.coloring.constance.Constants;
-import com.color.kid.colorpaintkids.R;
+import com.color.kid.coloring.R;
 import com.color.kid.coloring.adapter.ChoiseFragmentAdapter;
 import com.color.kid.coloring.view.ItemOffsetDecoration;
 

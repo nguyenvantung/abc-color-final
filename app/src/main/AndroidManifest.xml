@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.color.kid.colorpaintkids">
+    package="com.color.kid.coloring">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -16,7 +16,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:hardwareAccelerated="true"
-        android:theme="@style/AppTheme.NoActionBar">
+        android:theme="@style/AppTheme">
         <activity
             android:name="com.color.kid.coloring.ui.SplashActivity"
             android:label="@string/app_name"
@@ -34,39 +34,7 @@
         <activity
             android:name="com.color.kid.coloring.ui.MainActivity"
             android:screenOrientation="portrait"></activity>
-        <!--&lt;!&ndash;Include the AdActivity configChanges and theme. &ndash;&gt;
-        <activity android:name="com.google.android.gms.ads.AdActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
-            android:theme="@android:style/Theme.Translucent" />-->
 
-        <!--This meta-data tag is required to use Google Play Services.-->
-       <!-- <meta-data android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />-->
-
-        <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="65db9b3f07fe4aa24f91ff59b275cd17f6df2df8" />
-
-        <activity
-            android:name="com.startapp.android.publish.adsCommon.activities.OverlayActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@android:style/Theme.Translucent" />
-        <activity
-            android:name="com.startapp.android.publish.adsCommon.activities.FullScreenActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@android:style/Theme" />
-
-
-        <service android:name="com.startapp.android.publish.common.metaData.PeriodicMetaDataService" />
-        <service android:name="com.startapp.android.publish.common.metaData.InfoEventService" />
-        <receiver android:name="com.startapp.android.publish.common.metaData.BootCompleteListener" >
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver>
-
-       <!-- <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
--->
     </application>
 
 </manifest>

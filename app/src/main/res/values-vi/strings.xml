@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">BéTậpTô</string>
+    <string name="action_settings">Cài Đặt</string>
+    <string name="save_image_back">Bé có muốn lưu ảnh!</string>
+    <string name="update_version_title">Bạn có muốn tải bản cài đặt mới!</string>
+    <string name="yes">Có</string>
+    <string name="no">Không</string>
+</resources>

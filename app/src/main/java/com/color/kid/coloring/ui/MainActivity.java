@@ -10,13 +10,12 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
+import com.color.kid.coloring.R;
 import com.color.kid.coloring.fragment.SelectOptionFragment;
 import com.color.kid.coloring.util.FragmentUtil;
 import com.color.kid.coloring.util.SharePreferencesUtil;
-import com.color.kid.coloring.util.Util;
-import com.color.kid.colorpaintkids.R;
-import com.google.firebase.analytics.FirebaseAnalytics;
 import com.crashlytics.android.Crashlytics;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import org.jsoup.Jsoup;
 
@@ -31,7 +30,6 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Fabric.with(this, new Crashlytics());
         Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_main);
         mediaPlayer = MediaPlayer.create(this, R.raw.bgr_be_happy);

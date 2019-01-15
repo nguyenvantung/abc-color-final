@@ -3,7 +3,7 @@ package com.color.kid.coloring.fragment;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.color.kid.colorpaintkids.R;
+import com.color.kid.coloring.R;
 import com.color.kid.coloring.constance.Constants;
 import com.color.kid.coloring.ui.MainActivity;
 import com.color.kid.coloring.util.FragmentUtil;

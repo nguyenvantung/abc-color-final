@@ -1,6 +1,6 @@
 package com.color.kid.coloring.constance;
 
-import com.color.kid.colorpaintkids.R;
+import com.color.kid.coloring.R;
 
 /**
  * Created by TungDaiCa on 2/6/2017.

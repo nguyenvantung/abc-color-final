@@ -12,7 +12,7 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.widget.TextView;
 
-import com.color.kid.colorpaintkids.R;
+import com.color.kid.coloring.R;
 
 
 /**

@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.color.kid.colorpaintkids.R;
+import com.color.kid.coloring.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
