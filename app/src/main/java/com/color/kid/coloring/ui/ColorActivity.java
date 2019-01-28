@@ -18,6 +18,7 @@ import android.net.Uri;
 import android.opengl.GLSurfaceView;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
@@ -580,7 +581,10 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
             this.renderColor.onDestroyView();
         }
         mediaPlayer.stop();
-        handleShowAds();
+
+        if (interstitialAd != null) {
+            interstitialAd.destroy();
+        }
     }
 
     @OnClick(R.id.toolBush)
@@ -720,7 +724,7 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.save_image_back);
         builder.setNegativeButton(R.string.no, (dialog, which) -> {
-            super.onBackPressed();
+            handleShowAds();
             dialog.dismiss();
         });
         builder.setPositiveButton(R.string.yes, (dialog, which) -> {
@@ -738,7 +742,7 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
     }
 
     private void initFacebookAds(){
-        interstitialAd = new InterstitialAd(this, "ID");
+        interstitialAd = new InterstitialAd(this, Constants.ADS_FACE_ID);
         interstitialAd.setAdListener(new InterstitialAdListener() {
             @Override
             public void onInterstitialDisplayed(Ad ad) {
@@ -781,10 +785,19 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
         interstitialAd.loadAd();
     }
 
-    private void handleShowAds(){
+    private void handleShowAds() {
         int show = (new Random()).nextInt((10 - 1) + 1) + 1;
-        if (show == 1 || show == 3 || show == 6 || show == 8){
-            //interstitialAd.show();
+        if (show == 1 || show == 3 || show == 6 || show == 8) {
+            // Check if interstitialAd has been loaded successfully
+            if (interstitialAd == null || !interstitialAd.isAdLoaded()) {
+                super.onBackPressed();
+            }
+            // Check if ad is already expired or invalidated, and do not show ad if that is the case. You will not get paid to show an invalidated ad.
+            if (interstitialAd.isAdInvalidated()) {
+                super.onBackPressed();
+            }
+            // Show the ad
+            interstitialAd.show();
         }
 
     }

@@ -6,6 +6,7 @@
     <dimen name="item_image">5dp</dimen>
     <dimen name="item_color">2dp</dimen>
 
+    <dimen name="size_1">1dp</dimen>
     <dimen name="size_2">2dp</dimen>
     <dimen name="size_5">5dp</dimen>
     <dimen name="size_10">10dp</dimen>
