@@ -11,6 +11,10 @@ import com.color.kid.coloring.constance.Constants;
 import com.color.kid.coloring.R;
 import com.color.kid.coloring.adapter.ChoiseFragmentAdapter;
 import com.color.kid.coloring.view.ItemOffsetDecoration;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 import java.io.IOException;
 
@@ -27,6 +31,9 @@ public class SelectItemFragment extends BaseFragment {
 
     @BindView(R.id.listItem)
     RecyclerView recyclerView;
+
+    @BindView(R.id.adView)
+    AdView mAdView;
 
     private int option;
     private String item = "";
@@ -60,6 +67,7 @@ public class SelectItemFragment extends BaseFragment {
         option = this.getArguments().getInt(Constants.KEY_OPTION);
         ChoiseFragmentAdapter adapter = new ChoiseFragmentAdapter(getDataList(option), getActivity(), item);
         recyclerView.setAdapter(adapter);
+        showAdView();
     }
 
 
@@ -113,7 +121,40 @@ public class SelectItemFragment extends BaseFragment {
             e.printStackTrace();
         }
         return list;
+    }
 
+    public void showAdView(){
+        MobileAds.initialize(getActivity(),Constants.ADMOB_ID);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+        mAdView.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                // Code to be executed when an ad finishes loading.
+            }
+
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+                // Code to be executed when an ad request fails.
+            }
+
+            @Override
+            public void onAdOpened() {
+                // Code to be executed when an ad opens an overlay that
+                // covers the screen.
+            }
+
+            @Override
+            public void onAdLeftApplication() {
+                // Code to be executed when the user has left the app.
+            }
+
+            @Override
+            public void onAdClosed() {
+                // Code to be executed when when the user is about to return
+                // to the app after tapping on an ad.
+            }
+        });
     }
 
 

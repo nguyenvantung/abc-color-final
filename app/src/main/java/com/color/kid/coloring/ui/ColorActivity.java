@@ -684,13 +684,14 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
             mColoringBitmap = Util.overlay(mColoringBitmap, mOverlayBitmap);
             renderColor.setColoringBitmap(this.mColoringBitmap);
         }
+        handleShowAds();
         DialogShareImage dialogShareImage = new DialogShareImage(this, mColoringBitmap, new DialogShareImage.ShareCallBack() {
             @Override
             public void onCallBackDialog(boolean select) {
                 if (select){
                     shareImage();
-                }else {
-                    handleShowAds();
+               /* }else {
+                    handleShowAds();*/
                 }
             }
         });
@@ -724,8 +725,8 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.save_image_back);
         builder.setNegativeButton(R.string.no, (dialog, which) -> {
-            handleShowAds();
             dialog.dismiss();
+            super.onBackPressed();
         });
         builder.setPositiveButton(R.string.yes, (dialog, which) -> {
             dialog.dismiss();
@@ -790,11 +791,11 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
         if (show == 1 || show == 3 || show == 6 || show == 8) {
             // Check if interstitialAd has been loaded successfully
             if (interstitialAd == null || !interstitialAd.isAdLoaded()) {
-                super.onBackPressed();
+               return;
             }
             // Check if ad is already expired or invalidated, and do not show ad if that is the case. You will not get paid to show an invalidated ad.
             if (interstitialAd.isAdInvalidated()) {
-                super.onBackPressed();
+                return;
             }
             // Show the ad
             interstitialAd.show();
