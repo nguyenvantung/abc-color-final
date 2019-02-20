@@ -47,8 +47,11 @@ public class SelectOptionFragment extends BaseFragment {
 
 
     public void showAdView(){
-        MobileAds.initialize(getActivity(),Constants.ADMOB_ID);
-        AdRequest adRequest = new AdRequest.Builder().build();
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build();
+
+        // Start loading the ad in the background.
         mAdView.loadAd(adRequest);
         mAdView.setAdListener(new AdListener() {
             @Override

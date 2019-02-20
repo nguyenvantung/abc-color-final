@@ -14,7 +14,7 @@ public class Constants {
     public static final int MICKEY = 4;
     public static final int SANTA = 5;
     public static final int MERMAIDS = 10;
-    public static final String ADMOB_ID = "ca-app-pub-5997146054072325/5792876211";
-    public static final String ADS_FACE_ID = "590377158092577";
+    public static final String ADMOB_ID = "ca-app-pub-5997146054072325~1369743996";
+    public static final String ADS_FACE_ID = "414078242679327";
 
 }

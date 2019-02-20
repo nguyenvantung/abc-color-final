@@ -11,10 +11,12 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
 import com.color.kid.coloring.R;
+import com.color.kid.coloring.constance.Constants;
 import com.color.kid.coloring.fragment.SelectOptionFragment;
 import com.color.kid.coloring.util.FragmentUtil;
 import com.color.kid.coloring.util.SharePreferencesUtil;
 import com.crashlytics.android.Crashlytics;
+import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import org.jsoup.Jsoup;
@@ -31,6 +33,7 @@ public class MainActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics());
+        MobileAds.initialize(this, Constants.ADMOB_ID);
         setContentView(R.layout.activity_main);
         mediaPlayer = MediaPlayer.create(this, R.raw.bgr_be_happy);
         sharePreferencesUtil = new SharePreferencesUtil(this);
