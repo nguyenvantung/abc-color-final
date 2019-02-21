@@ -52,6 +52,7 @@ import com.facebook.ads.AdError;
 import com.facebook.ads.InterstitialAd;
 import com.facebook.ads.InterstitialAdListener;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -701,7 +702,8 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
     public void shareImage(){
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.putExtra(Intent.EXTRA_TEXT, "Hey view/download this image");
-        String path = Util.savebitmap(mColoringBitmap, filePath).getPath();
+        File file = Util.savebitmap(mColoringBitmap, filePath);
+        String path = file != null ? file.getPath(): "";
         Uri screenshotUri = Uri.parse(path);
         intent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
         intent.setType("image/*");

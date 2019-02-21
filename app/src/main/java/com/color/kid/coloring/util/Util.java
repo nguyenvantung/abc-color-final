@@ -14,6 +14,8 @@ import android.util.Log;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by Tung on 1/18/2017.
@@ -39,28 +41,41 @@ public class Util {
     }
 
     public static File savebitmap(Bitmap bitmap, String filename) {
-        String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
-        OutputStream outStream = null;
-
-        File file = new File(filename + ".png");
-        if (file.exists()) {
-            file.delete();
-            file = new File(extStorageDirectory, filename + ".png");
-            Log.e("file exist", "" + file + ",Bitmap= " + filename);
+        if (isExternalStorageWritable()) {
+            return saveImage(bitmap, filename);
         }
+        return null;
+    }
+
+    private static File saveImage(Bitmap finalBitmap, String fileName) {
+
+        String root = Environment.getExternalStorageState();
+        File myDir = new File(root + "/saved_images");
+        myDir.mkdirs();
+
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String fname = fileName + timeStamp +".jpg";
+
+        File file = new File(myDir, fname);
+        if (file.exists()) file.delete ();
         try {
-            // make a new bitmap from your file
-            bitmap = BitmapFactory.decodeFile(file.getName());
-            outStream = new FileOutputStream(file);
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, outStream);
-            outStream.flush();
-            outStream.close();
+            FileOutputStream out = new FileOutputStream(file);
+            finalBitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
+            out.flush();
+            out.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Log.e("file", "" + file);
         return file;
+    }
 
+    /* Checks if external storage is available for read and write */
+    public static boolean isExternalStorageWritable() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            return true;
+        }
+        return false;
     }
 
     public static void  playSong(Context context, int sound){
