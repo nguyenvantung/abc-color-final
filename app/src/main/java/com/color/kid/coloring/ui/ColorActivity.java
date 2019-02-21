@@ -702,7 +702,7 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
     public void shareImage(){
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.putExtra(Intent.EXTRA_TEXT, "Hey view/download this image");
-        File file = Util.savebitmap(mColoringBitmap, filePath);
+        File file = Util.saveBitmap(mColoringBitmap);
         String path = file != null ? file.getPath(): "";
         Uri screenshotUri = Uri.parse(path);
         intent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
@@ -732,7 +732,7 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
         });
         builder.setPositiveButton(R.string.yes, (dialog, which) -> {
             dialog.dismiss();
-            Util.savebitmap(mColoringBitmap, filePath).getPath();
+            Util.saveBitmap(mColoringBitmap).getPath();
             super.onBackPressed();
         });
 

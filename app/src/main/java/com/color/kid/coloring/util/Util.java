@@ -13,6 +13,7 @@ import android.util.Log;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -40,25 +41,28 @@ public class Util {
         return bitmap;
     }
 
-    public static File savebitmap(Bitmap bitmap, String filename) {
+    public static File saveBitmap(Bitmap bitmap) {
         if (isExternalStorageWritable()) {
-            return saveImage(bitmap, filename);
+            return saveImage(bitmap);
         }
         return null;
     }
 
-    private static File saveImage(Bitmap finalBitmap, String fileName) {
-
-        String root = Environment.getExternalStorageState();
-        File myDir = new File(root + "/saved_images");
-        myDir.mkdirs();
-
+    private static File saveImage(Bitmap finalBitmap) {
+        File myDir = new File(Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES), "saved_images");
+        DebugLog.e("saveImage:" + myDir.mkdirs());
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String fname = fileName + timeStamp +".jpg";
-
-        File file = new File(myDir, fname);
-        if (file.exists()) file.delete ();
+        String fName = "kid" + timeStamp +".jpg";
+        File file = null;
         try {
+            myDir.mkdirs();
+            if (!myDir.exists()){
+                myDir.createNewFile();
+            }
+            file = new File(myDir, fName);
+            if (file.exists()) file.delete ();
+            file.createNewFile();
             FileOutputStream out = new FileOutputStream(file);
             finalBitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
             out.flush();
