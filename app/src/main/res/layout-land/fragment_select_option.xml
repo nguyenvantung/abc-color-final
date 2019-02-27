@@ -60,8 +60,8 @@
             android:id="@+id/view_itemSatan"
             android:layout_width="@dimen/size_150"
             android:layout_height="@dimen/size_150"
-            android:layout_below="@+id/view_itemAnimal"
-            android:layout_marginTop="@dimen/size_20"
+            android:layout_toRightOf="@+id/view_itemCar"
+            android:layout_marginLeft="@dimen/size_20"
             android:layout_marginRight="@dimen/size_10"
             android:background="@drawable/bg_item_menu"
             android:gravity="center">
@@ -79,9 +79,10 @@
             android:layout_width="@dimen/size_150"
             android:layout_height="@dimen/size_150"
             android:layout_below="@+id/view_itemSatan"
-            android:layout_marginTop="@dimen/size_20"
+            android:layout_marginLeft="@dimen/size_20"
             android:layout_marginRight="@dimen/size_10"
-            android:layout_toRightOf="@+id/view_itemMickey"
+            android:layout_marginTop="@dimen/size_20"
+            android:layout_toRightOf="@+id/view_itemFruit"
             android:background="@drawable/bg_item_menu"
             android:gravity="center">
 
@@ -139,6 +140,6 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         ads:adSize="SMART_BANNER"
-        ads:adUnitId="ca-app-pub-7258268854083622/9177953380"/>
+        ads:adUnitId="ca-app-pub-5997146054072325/5625587731"></com.google.android.gms.ads.AdView>
 
 </RelativeLayout>

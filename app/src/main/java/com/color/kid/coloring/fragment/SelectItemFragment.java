@@ -1,5 +1,6 @@
 package com.color.kid.coloring.fragment;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -11,10 +12,13 @@ import android.widget.TextView;
 import com.color.kid.coloring.constance.Constants;
 import com.color.kid.coloring.R;
 import com.color.kid.coloring.adapter.ChoiseFragmentAdapter;
+import com.color.kid.coloring.ui.ColorActivity;
+import com.color.kid.coloring.util.Util;
 import com.color.kid.coloring.view.ItemOffsetDecoration;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 
 import java.io.IOException;
@@ -38,6 +42,10 @@ public class SelectItemFragment extends BaseFragment {
 
     private int option;
     private String item = "";
+
+    private boolean isShowADS = false;
+    private int isShowFirst = 0;
+    private InterstitialAd interstitialAd;
 
     public static SelectItemFragment newInstance(int option){
         Bundle bundle = new Bundle();
@@ -66,9 +74,42 @@ public class SelectItemFragment extends BaseFragment {
         option = this.getArguments().getInt(Constants.KEY_OPTION);
         ChoiseFragmentAdapter adapter = new ChoiseFragmentAdapter(getDataList(option), getActivity(), item);
         recyclerView.setAdapter(adapter);
+        adapter.setOnClickItem(fileName -> {
+            Intent intent = new Intent(getActivity(), ColorActivity.class);
+            intent.putExtra(Constants.KEY_DRAWABLE, fileName);
+            startActivity(intent);
+            Util.playSong(getActivity(), R.raw.sf_0);
+            isShowADS = true;
+        });
         setUpAdmob();
+        showAdViewFull();
     }
 
+    public void showAdViewFull(){
+        // Create the InterstitialAd and set the adUnitId.
+        interstitialAd = new InterstitialAd(getActivity());
+        // Defined in res/values/strings.xml
+        interstitialAd.setAdUnitId(Constants.ADMOB_UNIT_ID);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        interstitialAd.loadAd(adRequest);
+        interstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                super.onAdLoaded();
+                if (isShowFirst > 0){
+                    interstitialAd.show();
+                }
+            }
+
+        });
+    }
+
+    private void showInterstitial() {
+        // Show the ad if it's ready. Otherwise toast and restart the game.
+        if (interstitialAd != null && interstitialAd.isLoaded()) {
+            interstitialAd.show();
+        }
+    }
 
     private String[] getDataList(int position){
         String[] integerList = null;
@@ -174,6 +215,11 @@ public class SelectItemFragment extends BaseFragment {
         super.onResume();
         if (adView != null) {
             adView.resume();
+        }
+        if (isShowADS){
+            isShowADS = false;
+            isShowFirst = 1;
+            showInterstitial();
         }
     }
 
