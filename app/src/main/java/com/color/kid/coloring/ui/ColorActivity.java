@@ -687,7 +687,6 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
             mColoringBitmap = Util.overlay(mColoringBitmap, mOverlayBitmap);
             renderColor.setColoringBitmap(this.mColoringBitmap);
         }
-        handleShowAds();
         DialogShareImage dialogShareImage = new DialogShareImage(this, mColoringBitmap, new DialogShareImage.ShareCallBack() {
             @Override
             public void onCallBackDialog(boolean select) {
