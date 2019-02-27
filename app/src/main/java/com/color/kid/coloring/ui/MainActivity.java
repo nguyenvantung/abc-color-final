@@ -33,8 +33,9 @@ public class MainActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics());
-        MobileAds.initialize(this, Constants.ADMOB_ID);
         setContentView(R.layout.activity_main);
+        // Initialize the Mobile Ads SDK.
+        MobileAds.initialize(this, Constants.ADMOB_APP_ID);
         mediaPlayer = MediaPlayer.create(this, R.raw.bgr_be_happy);
         sharePreferencesUtil = new SharePreferencesUtil(this);
         if (sharePreferencesUtil.getSoundPlayed()){

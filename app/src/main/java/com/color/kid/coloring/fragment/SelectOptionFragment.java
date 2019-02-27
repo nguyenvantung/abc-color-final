@@ -1,7 +1,9 @@
 package com.color.kid.coloring.fragment;
 
+import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.color.kid.coloring.R;
 import com.color.kid.coloring.constance.Constants;
@@ -12,6 +14,7 @@ import com.color.kid.coloring.util.Util;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 
 import butterknife.BindView;
@@ -28,6 +31,9 @@ public class SelectOptionFragment extends BaseFragment {
 
     @BindView(R.id.adView)
     AdView mAdView;
+
+    private boolean isShowADS;
+    private InterstitialAd interstitialAd;
 
     @Override
     protected int getLayoutId() {
@@ -47,56 +53,38 @@ public class SelectOptionFragment extends BaseFragment {
 
 
     public void showAdView(){
-        AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .build();
-
-        // Start loading the ad in the background.
-        mAdView.loadAd(adRequest);
-        mAdView.setAdListener(new AdListener() {
+        // Create the InterstitialAd and set the adUnitId.
+        interstitialAd = new InterstitialAd(getActivity());
+        // Defined in res/values/strings.xml
+        interstitialAd.setAdUnitId(Constants.ADMOB_UNIT_ID);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        interstitialAd.loadAd(adRequest);
+        interstitialAd.setAdListener(new AdListener() {
             @Override
             public void onAdLoaded() {
-                // Code to be executed when an ad finishes loading.
-            }
-
-            @Override
-            public void onAdFailedToLoad(int errorCode) {
-                // Code to be executed when an ad request fails.
-            }
-
-            @Override
-            public void onAdOpened() {
-                // Code to be executed when an ad opens an overlay that
-                // covers the screen.
-            }
-
-            @Override
-            public void onAdLeftApplication() {
-                // Code to be executed when the user has left the app.
-            }
-
-            @Override
-            public void onAdClosed() {
-                // Code to be executed when when the user is about to return
-                // to the app after tapping on an ad.
+                super.onAdLoaded();
+                interstitialAd.show();
             }
         });
     }
 
     @OnClick(R.id.itemAnimal)
     void gotoListAminal(){
+        isShowADS = true;
         FragmentUtil.pushFragment(getActivity(), SelectItemFragment.newInstance(Constants.AMINAL), null);
         Util.playSong(getActivity(), R.raw.z_textures_menu);
     }
 
     @OnClick(R.id.itemCar)
     void gotoListCar(){
+        isShowADS = true;
         FragmentUtil.pushFragment(getActivity(), SelectItemFragment.newInstance(Constants.CARS), null);
         Util.playSong(getActivity(), R.raw.z_textures_menu);
     }
 
     @OnClick(R.id.itemFruit)
     void gotoListDinosaur(){
+        isShowADS = true;
         FragmentUtil.pushFragment(getActivity(), SelectItemFragment.newInstance(Constants.FOOD), null);
         Util.playSong(getActivity(), R.raw.z_textures_menu);
     }
@@ -104,12 +92,14 @@ public class SelectOptionFragment extends BaseFragment {
 
     @OnClick(R.id.itemMickey)
     void gotoListParty(){
+        isShowADS = true;
         FragmentUtil.pushFragment(getActivity(), SelectItemFragment.newInstance(Constants.MICKEY), null);
         Util.playSong(getActivity(), R.raw.z_textures_menu);
     }
 
     @OnClick(R.id.itemSatan)
     void gotoListSatan(){
+        isShowADS = true;
         FragmentUtil.pushFragment(getActivity(), SelectItemFragment.newInstance(Constants.SANTA), null);
         Util.playSong(getActivity(), R.raw.z_textures_menu);
     }
@@ -117,6 +107,7 @@ public class SelectOptionFragment extends BaseFragment {
 
     @OnClick(R.id.itemMermaids)
     void gotoListMermaids(){
+        isShowADS = true;
         FragmentUtil.pushFragment(getActivity(), SelectItemFragment.newInstance(Constants.MERMAIDS), null);
         Util.playSong(getActivity(), R.raw.z_textures_menu);
     }
@@ -134,4 +125,19 @@ public class SelectOptionFragment extends BaseFragment {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (isShowADS){
+            isShowADS = false;
+            showInterstitial();
+        }
+    }
+
+    private void showInterstitial() {
+        // Show the ad if it's ready. Otherwise toast and restart the game.
+        if (interstitialAd != null && interstitialAd.isLoaded()) {
+            interstitialAd.show();
+        }
+    }
 }

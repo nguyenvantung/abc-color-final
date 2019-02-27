@@ -4,6 +4,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -32,8 +33,8 @@ public class SelectItemFragment extends BaseFragment {
     @BindView(R.id.listItem)
     RecyclerView recyclerView;
 
-    @BindView(R.id.adView)
-    AdView mAdView;
+    @BindView(R.id.bannerAds)
+    AdView adView;
 
     private int option;
     private String item = "";
@@ -58,8 +59,6 @@ public class SelectItemFragment extends BaseFragment {
         recyclerView.addItemDecoration(itemDecoration);
         Typeface font1 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/cooper_black.ttf");
         tvTitle.setTypeface(font1);
-
-
     }
 
     @Override
@@ -67,7 +66,7 @@ public class SelectItemFragment extends BaseFragment {
         option = this.getArguments().getInt(Constants.KEY_OPTION);
         ChoiseFragmentAdapter adapter = new ChoiseFragmentAdapter(getDataList(option), getActivity(), item);
         recyclerView.setAdapter(adapter);
-        showAdView();
+        setUpAdmob();
     }
 
 
@@ -123,11 +122,14 @@ public class SelectItemFragment extends BaseFragment {
         return list;
     }
 
-    public void showAdView(){
-        MobileAds.initialize(getActivity(),Constants.ADMOB_ID);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-        mAdView.setAdListener(new AdListener() {
+    private void setUpAdmob(){
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build();
+
+        // Start loading the ad in the background.
+        adView.loadAd(adRequest);
+        adView.setAdListener(new AdListener() {
             @Override
             public void onAdLoaded() {
                 // Code to be executed when an ad finishes loading.
@@ -136,6 +138,7 @@ public class SelectItemFragment extends BaseFragment {
             @Override
             public void onAdFailedToLoad(int errorCode) {
                 // Code to be executed when an ad request fails.
+                Log.e("load ads", "onAdFailedToLoad:" + errorCode);
             }
 
             @Override
@@ -158,5 +161,28 @@ public class SelectItemFragment extends BaseFragment {
     }
 
 
+    @Override
+    public void onPause() {
+        if (adView != null) {
+            adView.pause();
+        }
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (adView != null) {
+            adView.resume();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        if (adView != null) {
+            adView.destroy();
+        }
+        super.onDestroy();
+    }
 
 }

@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/loading_backround"
     android:orientation="vertical"
     android:padding="10dp">
@@ -39,19 +41,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/titleOption"
-        android:layout_above="@+id/adView"
-        android:layout_margin="10dp" />
-
+        android:padding="10dp"
+        android:layout_marginBottom="20dp"/>
     <com.google.android.gms.ads.AdView
-        xmlns:ads="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/adView"
+        android:id="@+id/bannerAds"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         ads:adSize="SMART_BANNER"
-        ads:adUnitId="ca-app-pub-5997146054072325/5792876211">
-    </com.google.android.gms.ads.AdView>
+        ads:adUnitId="ca-app-pub-7258268854083622/5423112024" />
 
 
 </RelativeLayout>

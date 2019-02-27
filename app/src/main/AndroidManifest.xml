@@ -17,6 +17,11 @@
         android:supportsRtl="true"
         android:hardwareAccelerated="true"
         android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-7258268854083622~1890195153"/>
+
         <activity
             android:name="com.color.kid.coloring.ui.SplashActivity"
             android:label="@string/app_name"
@@ -35,12 +40,6 @@
             android:name="com.color.kid.coloring.ui.MainActivity"
             android:screenOrientation="portrait"></activity>
         <activity android:name="com.facebook.ads.AudienceNetworkActivity" android:hardwareAccelerated="true"/>
-
-
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-5997146054072325~1369743996"/>
-
     </application>
 
 </manifest>
