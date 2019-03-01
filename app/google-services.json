@@ -1,35 +1,35 @@
 {
   "project_info": {
-    "project_number": "268374863955",
-    "firebase_url": "https://kids-coloring-76edb.firebaseio.com",
-    "project_id": "kids-coloring-76edb",
-    "storage_bucket": "kids-coloring-76edb.appspot.com"
+    "project_number": "547632225083",
+    "firebase_url": "https://betapto-4b743.firebaseio.com",
+    "project_id": "betapto-4b743",
+    "storage_bucket": "betapto-4b743.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:268374863955:android:ae134c858bdc9929",
+        "mobilesdk_app_id": "1:547632225083:android:a0706d35fac68b94",
         "android_client_info": {
-          "package_name": "com.color.kid.coloring"
+          "package_name": "com.color.kid.paint"
         }
       },
       "oauth_client": [
         {
-          "client_id": "268374863955-avq95ppudn2avijlerqg7g9pjhphep7p.apps.googleusercontent.com",
+          "client_id": "547632225083-dbf8si4nsi77a7meopd65oa8qdlcd90u.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.color.kid.coloring",
-            "certificate_hash": "4573d86684dfdab6b7a65b7dbb75463a84496983"
+            "package_name": "com.color.kid.paint",
+            "certificate_hash": "0c76176968d9021528c56dd7746a110fca1394b0"
           }
         },
         {
-          "client_id": "268374863955-47v1ci91aqgs5pbut17qoioa3vmeua39.apps.googleusercontent.com",
+          "client_id": "547632225083-dfril48tsrsnkkuahrgv7pg9cgugk09b.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDSXZuU_DQbvf4Ax--Zo06GKFc7JJBGiz4"
+          "current_key": "AIzaSyByKJlBcBt80BZDLtuLfOu_JhWKie57W-8"
         }
       ],
       "services": {
@@ -40,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "268374863955-47v1ci91aqgs5pbut17qoioa3vmeua39.apps.googleusercontent.com",
+              "client_id": "547632225083-dfril48tsrsnkkuahrgv7pg9cgugk09b.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

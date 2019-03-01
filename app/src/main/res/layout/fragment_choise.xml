@@ -25,7 +25,7 @@
         android:src="@drawable/select_picture_btn_right"
         android:visibility="gone" />
 
-    <com.color.kid.coloring.view.GradientTextView
+    <com.color.kid.paint.view.GradientTextView
         android:id="@+id/titleOption"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
