@@ -33,7 +33,7 @@
             android:src="@drawable/bg_item_select_color"
             android:tint="@color/aquamarine"/>
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/listToolColor"
             android:layout_width="match_parent"
             android:layout_height="80dp"

@@ -2,10 +2,11 @@ package com.color.kid.paint.adapter.viewHolder;
 
 import android.graphics.PorterDuff;
 import android.os.Build;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.color.kid.paint.R;
 
