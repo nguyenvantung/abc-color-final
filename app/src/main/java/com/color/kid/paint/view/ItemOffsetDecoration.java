@@ -2,10 +2,11 @@ package com.color.kid.paint.view;
 
 import android.content.Context;
 import android.graphics.Rect;
-import android.support.annotation.DimenRes;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
+
+import androidx.annotation.DimenRes;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Created by Tung Nguyen on 12/23/2016.

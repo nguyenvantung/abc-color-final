@@ -1,8 +1,9 @@
 package com.color.kid.paint.adapter;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.color.kid.paint.R;
 import com.color.kid.paint.adapter.viewHolder.ColorViewHolder;

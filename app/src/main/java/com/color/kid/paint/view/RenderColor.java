@@ -6,9 +6,10 @@ import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.opengl.GLUtils;
 import android.opengl.Matrix;
-import android.support.v4.view.accessibility.AccessibilityNodeInfoCompat;
 import android.util.Log;
 
+
+import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 
 import com.color.kid.paint.object.BackgroundTable;
 import com.color.kid.paint.object.Table;
