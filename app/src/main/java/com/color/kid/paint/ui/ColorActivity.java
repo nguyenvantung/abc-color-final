@@ -21,6 +21,7 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.GestureDetector;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.Window;
 import android.view.WindowManager;
@@ -38,6 +39,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.color.kid.paint.ColorPaintKidsApplication;
 import com.color.kid.paint.adapter.OptionColorAdapter;
 import com.color.kid.paint.adapter.viewHolder.ColorViewHolder;
+import com.color.kid.paint.constance.ConstantSource;
 import com.color.kid.paint.constance.Constants;
 import com.color.kid.paint.util.DebugLog;
 import com.color.kid.paint.util.SharePreferencesUtil;
@@ -72,9 +74,6 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
     @BindView(R.id.surfaceView)
     GLSurfaceView surfaceView;
 
-    @BindView(R.id.listToolColor)
-    RecyclerView listToolColor;
-
     @BindView(R.id.toolBucket)
     ImageView imgBucket;
 
@@ -95,6 +94,9 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
 
     @BindView(R.id.ads_container)
     LinearLayout layoutAds;
+
+    @BindView(R.id.layoutPencil)
+    LinearLayout layoutPencil;
 
     private RenderColor renderColor;
     private ColoringGLRendererSaver mRendererSaver;
@@ -135,11 +137,11 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
 
     @Override
     public void onSelectColor(int color) {
-       colorDraw = getResources().getColor(color);
         setColorOption(color);
     }
 
     public void setColorOption(int color){
+        colorDraw = getResources().getColor(color);
         if(android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
             imgSelect.setColorFilter(this.getResources().getColor(color), PorterDuff.Mode.MULTIPLY);
         }else {
@@ -195,14 +197,33 @@ public class ColorActivity extends FragmentActivity implements GestureDetector.O
         this.mIsScaling = false;
         mSelectedTool = Tool.BRUSH;
         imgBush.setSelected(true);
-        listToolColor.setLayoutManager(new GridLayoutManager(this, 2, GridLayoutManager.HORIZONTAL, false));
-        ItemOffsetDecoration itemDecoration = new ItemOffsetDecoration(this, R.dimen.item_color);
-        listToolColor.addItemDecoration(itemDecoration);
-        OptionColorAdapter optionColorAdapter = new OptionColorAdapter();
-        optionColorAdapter.setSelectItemColor(this);
-        listToolColor.setAdapter(optionColorAdapter);
         imgSelect.setColorFilter(getBaseContext().getResources().getColor(R.color.aquamarine));
         initFacebookAds();
+        handleClickView();
+    }
+    private void handleClickView(){
+
+        for(int index = 0; index < layoutPencil.getChildCount(); index++) {
+            ImageView viewPencil = (ImageView) layoutPencil.getChildAt(index);
+            viewPencil.setOnClickListener(v -> {
+                handleSelectPencil(v.getId(), layoutPencil);
+            });
+        }
+    }
+
+
+    private void handleSelectPencil(int id, LinearLayout layout){
+        for(int index = 0; index < layout.getChildCount(); index++) {
+            ImageView viewPencil = (ImageView) layout.getChildAt(index);
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams((int) getResources().getDimension(R.dimen.size_50),  LinearLayout.LayoutParams.WRAP_CONTENT);
+            if(viewPencil.getId() == id){
+                setColorOption(ConstantSource.listColorTool[index]);
+                layoutParams.gravity = Gravity.TOP;
+            }else {
+                layoutParams.gravity = Gravity.BOTTOM;
+            }
+            viewPencil.setLayoutParams(layoutParams);
+        }
     }
 
     public void createDrawableImage(){

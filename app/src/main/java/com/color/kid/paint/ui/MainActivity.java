@@ -16,13 +16,10 @@ import com.color.kid.paint.constance.Constants;
 import com.color.kid.paint.fragment.SelectOptionFragment;
 import com.color.kid.paint.util.FragmentUtil;
 import com.color.kid.paint.util.SharePreferencesUtil;
-import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import org.jsoup.Jsoup;
-
-import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends FragmentActivity {
     MediaPlayer mediaPlayer;
@@ -33,7 +30,6 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_main);
         // Initialize the Mobile Ads SDK.
         MobileAds.initialize(this, Constants.ADMOB_APP_ID);

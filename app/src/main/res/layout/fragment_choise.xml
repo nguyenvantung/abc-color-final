@@ -6,41 +6,18 @@
     android:layout_height="match_parent"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/loading_backround"
-    android:orientation="vertical"
-    android:padding="10dp">
+    android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/btnBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/select_picture_btn_left"
-        android:visibility="gone" />
-
-    <ImageView
-        android:id="@+id/btnNext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-
-        android:src="@drawable/select_picture_btn_right"
-        android:visibility="gone" />
-
-    <com.color.kid.paint.view.GradientTextView
-        android:id="@+id/titleOption"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/btnBack"
-        android:gravity="center_horizontal"
-        android:paddingLeft="-40dp"
-        android:textSize="50.0dip"
-        app:colorEndGradient="@color/select_picture_text_ends"
-        app:colorStartGradient="@color/select_picture_text_start" />
+    <include
+        layout="@layout/layout_toolbar"
+        android:id="@+id/header"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listItem"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/titleOption"
+        android:layout_below="@+id/header"
+        android:layout_above="@+id/bannerAds"
         android:padding="10dp"
         android:layout_marginBottom="20dp"/>
     <com.google.android.gms.ads.AdView

@@ -52,9 +52,9 @@ public class GradientTextView extends TextView {
         TextPaint paint = getPaint();
         paint.clearShadowLayer();
         paint.setShader(null);
-        paint.setStyle(Paint.Style.STROKE);
+        paint.setStyle(Paint.Style.FILL);
         paint.setStrokeJoin(Paint.Join.ROUND);
-        setTextColor(ContextCompat.getColor(getContext(), R.color.select_picture_text_outline));
+        setTextColor(ContextCompat.getColor(getContext(), R.color.orange));
         paint.setStrokeWidth((float) ((int) TypedValue.applyDimension(1, 3.0f, getResources().getDisplayMetrics())));
         super.onDraw(canvas);
         if (this.colorStartGradient != ContextCompat.getColor(getContext(), R.color.select_picture_text_start) && this.colorEndGradient != ContextCompat.getColor(getContext(), R.color.select_picture_text_ends)) {

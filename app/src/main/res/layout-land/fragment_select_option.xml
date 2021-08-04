@@ -5,133 +5,113 @@
     android:background="@drawable/loading_backround"
     android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/itemSound"
-        android:layout_width="@dimen/size_40"
-        android:layout_height="@dimen/size_40"
-        android:layout_marginLeft="@dimen/size_20"
-        android:src="@drawable/item_sound" />
 
-
-    <RelativeLayout
-        android:id="@+id/listOption"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <HorizontalScrollView
         android:layout_above="@+id/adView"
-        android:layout_below="@+id/itemSound"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:scrollbars="horizontal">
         <LinearLayout
-            android:id="@+id/view_itemAnimal"
-            android:layout_width="@dimen/size_150"
-            android:layout_height="@dimen/size_150"
-            android:layout_marginRight="@dimen/size_10"
-            android:background="@drawable/bg_item_menu"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
             android:gravity="center">
+            <LinearLayout
+                android:id="@+id/view_itemAnimal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size_10"
+                android:background="@drawable/bg_book"
+                android:gravity="center">
 
-            <ImageView
-                android:id="@+id/itemAnimal"
-                android:layout_width="@dimen/size_120"
-                android:layout_height="@dimen/size_120"
-                android:layout_marginLeft="-5dp"
-                android:layout_marginRight="@dimen/size_10"
-                android:src="@drawable/aminal" />
+                <ImageView
+                    android:id="@+id/itemAnimal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/aminal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/view_itemCar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size_10"
+                android:background="@drawable/bg_book"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/itemCar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/size_120"
+                    android:src="@drawable/car" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/view_itemSatan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size_10"
+                android:background="@drawable/bg_book"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/itemSatan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/size_120"
+                    android:src="@drawable/satan" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/view_itemMermaids"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size_10"
+                android:background="@drawable/bg_book"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/itemMermaids"
+                    android:layout_width="@dimen/size_120"
+                    android:layout_height="@dimen/size_120"
+                    android:src="@drawable/mermaids" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/view_itemFruit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size_10"
+                android:background="@drawable/bg_book"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/itemFruit"
+                    android:layout_width="@dimen/size_120"
+                    android:layout_height="@dimen/size_120"
+                    android:layout_below="@+id/view_itemCar"
+                    android:src="@drawable/fruit" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/view_itemMickey"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size_10"
+                android:background="@drawable/bg_book"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/itemMickey"
+                    android:layout_width="@dimen/size_120"
+                    android:layout_height="@dimen/size_120"
+                    android:src="@drawable/mickey" />
+            </LinearLayout>
         </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/view_itemCar"
-            android:layout_width="@dimen/size_150"
-            android:layout_height="@dimen/size_150"
-            android:layout_marginLeft="@dimen/size_10"
-            android:layout_toRightOf="@+id/view_itemAnimal"
-            android:background="@drawable/bg_item_menu"
-            android:gravity="center">
-
-            <ImageView
-                android:id="@+id/itemCar"
-                android:layout_width="@dimen/size_110"
-                android:layout_height="@dimen/size_120"
-                android:src="@drawable/car" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/view_itemSatan"
-            android:layout_width="@dimen/size_150"
-            android:layout_height="@dimen/size_150"
-            android:layout_toRightOf="@+id/view_itemCar"
-            android:layout_marginLeft="@dimen/size_20"
-            android:layout_marginRight="@dimen/size_10"
-            android:background="@drawable/bg_item_menu"
-            android:gravity="center">
-
-            <ImageView
-                android:id="@+id/itemSatan"
-                android:layout_width="@dimen/size_120"
-                android:layout_height="@dimen/size_120"
-                android:src="@drawable/satan" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/view_itemMermaids"
-            android:layout_width="@dimen/size_150"
-            android:layout_height="@dimen/size_150"
-            android:layout_below="@+id/view_itemSatan"
-            android:layout_marginLeft="@dimen/size_20"
-            android:layout_marginRight="@dimen/size_10"
-            android:layout_marginTop="@dimen/size_20"
-            android:layout_toRightOf="@+id/view_itemFruit"
-            android:background="@drawable/bg_item_menu"
-            android:gravity="center">
-
-            <ImageView
-                android:id="@+id/itemMermaids"
-                android:layout_width="@dimen/size_120"
-                android:layout_height="@dimen/size_120"
-                android:src="@drawable/mermaids" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/view_itemFruit"
-            android:layout_width="@dimen/size_150"
-            android:layout_height="@dimen/size_150"
-            android:layout_below="@+id/view_itemAnimal"
-            android:layout_marginLeft="@dimen/size_10"
-            android:layout_marginTop="@dimen/size_20"
-            android:layout_toRightOf="@+id/view_itemAnimal"
-            android:background="@drawable/bg_item_menu"
-            android:gravity="center">
-
-            <ImageView
-                android:id="@+id/itemFruit"
-                android:layout_width="@dimen/size_120"
-                android:layout_height="@dimen/size_120"
-                android:layout_below="@+id/view_itemCar"
-                android:src="@drawable/fruit" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/view_itemMickey"
-            android:layout_width="@dimen/size_150"
-            android:layout_height="@dimen/size_150"
-            android:layout_below="@+id/view_itemSatan"
-            android:layout_marginTop="@dimen/size_20"
-            android:layout_marginRight="@dimen/size_10"
-            android:background="@drawable/bg_item_menu"
-            android:gravity="center">
-
-            <ImageView
-                android:id="@+id/itemMickey"
-                android:layout_width="@dimen/size_120"
-                android:layout_height="@dimen/size_120"
-                android:src="@drawable/mickey" />
-        </LinearLayout>
-
-    </RelativeLayout>
+    </HorizontalScrollView>
 
     <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:id="@+id/adView"

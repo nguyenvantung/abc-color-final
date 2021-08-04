@@ -31,7 +31,7 @@ import butterknife.BindView;
 
 public class SelectItemFragment extends BaseFragment {
 
-    @BindView(R.id.titleOption)
+    @BindView(R.id.title)
     TextView tvTitle;
 
     @BindView(R.id.listItem)
@@ -213,14 +213,14 @@ public class SelectItemFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (adView != null) {
+        /*if (adView != null) {
             adView.resume();
         }
         if (isShowADS){
             isShowADS = false;
             isShowFirst = 1;
             showInterstitial();
-        }
+        }*/
     }
 
     @Override

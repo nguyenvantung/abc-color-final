@@ -1,8 +1,10 @@
 package com.color.kid.paint.fragment;
 
+import android.graphics.Typeface;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.color.kid.paint.R;
 import com.color.kid.paint.constance.Constants;
@@ -23,11 +25,12 @@ import butterknife.OnClick;
 
 public class SelectOptionFragment extends BaseFragment {
     SharePreferencesUtil sharePreferencesUtil;
-    @BindView(R.id.itemSound)
-    ImageView imgSound;
 
     @BindView(R.id.adView)
     AdView mAdView;
+
+    @BindView(R.id.title)
+    TextView tvTitle;
 
     @Override
     protected int getLayoutId() {
@@ -37,7 +40,8 @@ public class SelectOptionFragment extends BaseFragment {
     @Override
     protected void initView(View root) {
         sharePreferencesUtil = new SharePreferencesUtil(getActivity());
-        imgSound.setSelected(sharePreferencesUtil.getSoundPlayed());
+        Typeface font1 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/cooper_black.ttf");
+        tvTitle.setTypeface(font1);
     }
 
     @Override
@@ -119,19 +123,6 @@ public class SelectOptionFragment extends BaseFragment {
     void gotoListMermaids(){
         FragmentUtil.pushFragment(getActivity(), SelectItemFragment.newInstance(Constants.MERMAIDS), null);
         Util.playSong(getActivity(), R.raw.z_textures_menu);
-    }
-
-    @OnClick(R.id.itemSound)
-    void onPlaySound(){
-        if (imgSound.isSelected()){
-            ((MainActivity)getActivity()).playSound(false);
-            sharePreferencesUtil.setSoundPlayed(false);
-            imgSound.setSelected(false);
-        }else {
-            ((MainActivity)getActivity()).playSound(true);
-            sharePreferencesUtil.setSoundPlayed(true);
-            imgSound.setSelected(true);
-        }
     }
 
     @Override

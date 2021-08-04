@@ -26,19 +26,20 @@
 
         <ImageView
             android:id="@+id/img_select_color"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="@dimen/size_70"
+            android:layout_height="@dimen/size_70"
             android:layout_centerVertical="true"
             android:layout_margin="5dp"
             android:src="@drawable/bg_item_select_color"
             android:tint="@color/aquamarine"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/listToolColor"
+        <include
+            layout="@layout/layout_select_bush"
+            android:layout_toRightOf="@id/img_select_color"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_toRightOf="@+id/img_select_color"
-            android:padding="@dimen/size_1"/>
+            android:layout_height="wrap_content"
+            android:id="@+id/layoutBottomPen"
+            android:layout_marginBottom="@dimen/size_130"/>
     </RelativeLayout>
 
     <LinearLayout

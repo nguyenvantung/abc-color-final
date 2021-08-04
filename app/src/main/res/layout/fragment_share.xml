@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/loading_backround"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:background="@color/green">
 
     <TextView
         android:id="@+id/titleShare"
@@ -15,7 +16,7 @@
     <ImageView
         android:id="@+id/imgShare"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="@dimen/size_350"
         android:layout_above="@+id/layoutButton"
         android:layout_below="@+id/titleShare"
         android:layout_margin="10dp" />
@@ -25,11 +26,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginBottom="21dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_marginBottom="@dimen/size_20"
+        android:gravity="center">
 
         <ImageView
             android:id="@+id/buttonCancel"
@@ -47,4 +45,4 @@
     </LinearLayout>
 
 
-</RelativeLayout>
+</LinearLayout>
